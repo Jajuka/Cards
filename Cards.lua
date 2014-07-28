@@ -39,11 +39,6 @@ function Cards:Init()
 	local strConfigureButtonText = ""
 	local tDependencies = {	}
     Apollo.RegisterAddon(self, bHasConfigureFunction, strConfigureButtonText, tDependencies)
-	Apollo.RegisterSlashCommand("cards", "OnSlashCommand", self)
-	Apollo.RegisterEventHandler("InterfaceMenuListHasLoaded", "OnInterfaceMenuListHasLoaded", self)
-	Apollo.RegisterEventHandler("Saikou:Cards_MiniButton", "OnSlashCommand", self)
-	Apollo.RegisterEventHandler("Saikou:Cards_BattleStart", "OnBattleStart", self)
-	Apollo.RegisterEventHandler("Saikou:Cards_BattleComplete", "OnBattleComplete", self)
 end
  
 function Cards:OnInterfaceMenuListHasLoaded()
@@ -83,9 +78,13 @@ function Cards:OnDocLoaded()
 				
 		-- Register handlers for events, slash commands and timer, etc.
 		Apollo.RegisterSlashCommand("cards", "OnSlashCommand", self)
-		Apollo.RegisterSlashCommand("lootcard", "OnTestLootSlashCommand", self)
-		Apollo.RegisterSlashCommand("test", "OnTestTargetSlashCommand", self)
-		
+		--Apollo.RegisterSlashCommand("lootcard", "OnTestLootSlashCommand", self)
+		--Apollo.RegisterSlashCommand("cardstest", "OnTestTargetSlashCommand", self)
+		Apollo.RegisterEventHandler("InterfaceMenuListHasLoaded", "OnInterfaceMenuListHasLoaded", self)
+		Apollo.RegisterEventHandler("Saikou:Cards_MiniButton", "OnSlashCommand", self)
+		Apollo.RegisterEventHandler("Saikou:Cards_BattleStart", "OnBattleStart", self)
+		Apollo.RegisterEventHandler("Saikou:Cards_BattleComplete", "OnBattleComplete", self)
+			
 		-- Register event handlers.
 		Apollo.RegisterEventHandler("CombatLogDamage", "OnCombatLogDamage", self)
 		
@@ -96,77 +95,6 @@ function Cards:OnDocLoaded()
 		CardsData.Categorise()
 		self:InitLootFrame()
 		
-		if not self.tCollection.bIsInitialised then
-			self.tCollection = {}
-			self.tCollection.bIsInitialised = true
-			
-			-- Set up some default cards (5 random critters, 3 creatures, the path the player has, the player's class and the race the character is playing).
-			local kMinimumCritterCard = 72
-			local kMaximumCritterCard = 79
-			local kMinimumCreatureCard = 15
-			local kMaximumCreatureCard = 71
-			
-			for iIndex = 1, 5 do
-				self:AddCardToCollection(math.random(kMinimumCritterCard, kMaximumCritterCard))
-			end
-			for iIndex = 1, 3 do
-				self:AddCardToCollection(math.random(kMinimumCreatureCard, kMaximumCreatureCard ))
-			end
-			local oPlayer = GameLib.GetPlayerUnit()
-			if oPlayer then
-				local eRace = oPlayer:GetRaceId()
-				local eFaction = oPlayer:GetFaction()
-				local ePath = oPlayer:GetPlayerPathType()
-				local eClass = oPlayer:GetClassId()
-				
-				-- Give the player a path card that matches their path.
-				if ePath == PlayerPathLib.PlayerPathType_Explorer then
-					self:AddCardToCollection(CardsData.knCardIdExplorer)
-				elseif ePath == PlayerPathLib.PlayerPathType_Scientist then
-					self:AddCardToCollection(CardsData.knCardIdScientist)
-				elseif ePath == PlayerPathLib.PlayerPathType_Settler then
-					self:AddCardToCollection(CardsData.knCardIdSettler)
-				elseif ePath == PlayerPathLib.PlayerPathType_Soldier then
-					self:AddCardToCollection(CardsData.knCardIdSoldier)
-				end
-				
-				-- Give the player a race card that matches their race.
-				if eRace == GameLib.CodeEnumRace.Human then
-					if eFaction == Unit.CodeEnumFaction.DominionPlayer then
-						self:AddCardToCollection(CardsData.knCardIdCassian)
-					else
-						self:AddCardToCollection(CardsData.knCardIdHuman)
-					end
-				elseif eRace == GameLib.CodeEnumRace.Aurin then
-					self:AddCardToCollection(CardsData.knCardIdAurin)
-				elseif eRace == GameLib.CodeEnumRace.Chua then
-					self:AddCardToCollection(CardsData.knCardIdChua)
-				elseif eRace == GameLib.CodeEnumRace.Draken then
-					self:AddCardToCollection(CardsData.knCardIdDraken)
-				elseif eRace == GameLib.CodeEnumRace.Granok then
-					self:AddCardToCollection(CardsData.knCardIdGranok)
-				elseif eRace == GameLib.CodeEnumRace.Mechari then
-					self:AddCardToCollection(CardsData.knCardIdMechari)
-				elseif eRace == GameLib.CodeEnumRace.Mordesh then
-					self:AddCardToCollection(CardsData.knCardIdMordesh)
-				end
-				
-				-- Give the player a class card that matches their class.
-				if eClass == GameLib.CodeEnumClass.Engineer then
-					self:AddCardToCollection(CardsData.knCardIdEngineer)
-				elseif eClass == GameLib.CodeEnumClass.Esper then
-					self:AddCardToCollection(CardsData.knCardIdEsper)
-				elseif eClass == GameLib.CodeEnumClass.Medic then
-					self:AddCardToCollection(CardsData.knCardIdMedic)
-				elseif eClass == GameLib.CodeEnumClass.Spellslinger then
-					self:AddCardToCollection(CardsData.knCardIdSpellslinger)
-				elseif eClass == GameLib.CodeEnumClass.Stalker then
-					self:AddCardToCollection(CardsData.knCardIdStalker)
-				elseif eClass == GameLib.CodeEnumClass.Warrior then
-					self:AddCardToCollection(CardsData.knCardIdWarrior)
-				end
-			end
-		end
 	end
 end
 
@@ -175,12 +103,17 @@ end
 -----------------------------------------------------------------------------------------------
 
 -- on SlashCommand "/cards"
-function Cards:OnSlashCommand()
+function Cards:OnSlashCommand( command, args )
+	local bForceRegenerate = false
+	if args == "reset" then
+		bForceRegenerate = true
+	end
+	self:InitialiseDefaultCollection(bForceRegenerate)
 	self.wndMenu:Invoke() -- show the window
 end
 
 -- on SlashCommand "/lootcard"
-function Cards:OnTestLootSlashCommand()
+function Cards:OnTestLootSlashCommand( command, args )
 	-- Loot a random number of random cards.	
 	local nCards = math.random(1, 10)
 	for iIndex = 1, nCards do
@@ -242,6 +175,83 @@ function Cards:ChooseRandomQualityCard()
 	
 	local tCard = tList[math.random(#tList)]
 	return tCard
+end
+
+function Cards:InitialiseDefaultCollection( bForceRegenerate )
+	if (not self.tCollection.bIsInitialised) or bForceRegenerate then
+		local oPlayer = GameLib.GetPlayerUnit()
+		-- Depending on what part of the loading sequence calls this, there may not be a player unit yet, so check first.
+		if oPlayer then
+			self.tCollection = {}
+			self.tCollection.bIsInitialised = true
+			self.tDeck = {}
+		
+			-- Set up some default cards (5 random critters, 3 creatures, the path the player has, the player's class and the race the character is playing).
+			local kMinimumCritterCard = 72
+			local kMaximumCritterCard = 79
+			local kMinimumCreatureCard = 15
+			local kMaximumCreatureCard = 71
+		
+			for iIndex = 1, 5 do
+				self:AddCardToCollection(math.random(kMinimumCritterCard, kMaximumCritterCard))
+			end
+			for iIndex = 1, 3 do
+				self:AddCardToCollection(math.random(kMinimumCreatureCard, kMaximumCreatureCard ))
+			end
+			
+			local eRace = oPlayer:GetRaceId()
+			local eFaction = oPlayer:GetFaction()
+			local ePath = oPlayer:GetPlayerPathType()
+			local eClass = oPlayer:GetClassId()
+			
+			-- Give the player a path card that matches their path.
+			if ePath == PlayerPathLib.PlayerPathType_Explorer then
+				self:AddCardToCollection(CardsData.knCardIdExplorer)
+			elseif ePath == PlayerPathLib.PlayerPathType_Scientist then
+				self:AddCardToCollection(CardsData.knCardIdScientist)
+			elseif ePath == PlayerPathLib.PlayerPathType_Settler then
+				self:AddCardToCollection(CardsData.knCardIdSettler)
+			elseif ePath == PlayerPathLib.PlayerPathType_Soldier then
+				self:AddCardToCollection(CardsData.knCardIdSoldier)
+			end
+			
+			-- Give the player a race card that matches their race.
+			if eRace == GameLib.CodeEnumRace.Human then
+				if eFaction == Unit.CodeEnumFaction.DominionPlayer then
+					self:AddCardToCollection(CardsData.knCardIdCassian)
+				else
+					self:AddCardToCollection(CardsData.knCardIdHuman)
+				end
+			elseif eRace == GameLib.CodeEnumRace.Aurin then
+				self:AddCardToCollection(CardsData.knCardIdAurin)
+			elseif eRace == GameLib.CodeEnumRace.Chua then
+				self:AddCardToCollection(CardsData.knCardIdChua)
+			elseif eRace == GameLib.CodeEnumRace.Draken then
+				self:AddCardToCollection(CardsData.knCardIdDraken)
+			elseif eRace == GameLib.CodeEnumRace.Granok then
+				self:AddCardToCollection(CardsData.knCardIdGranok)
+			elseif eRace == GameLib.CodeEnumRace.Mechari then
+				self:AddCardToCollection(CardsData.knCardIdMechari)
+			elseif eRace == GameLib.CodeEnumRace.Mordesh then
+				self:AddCardToCollection(CardsData.knCardIdMordesh)
+			end
+			
+			-- Give the player a class card that matches their class.
+			if eClass == GameLib.CodeEnumClass.Engineer then
+				self:AddCardToCollection(CardsData.knCardIdEngineer)
+			elseif eClass == GameLib.CodeEnumClass.Esper then
+				self:AddCardToCollection(CardsData.knCardIdEsper)
+			elseif eClass == GameLib.CodeEnumClass.Medic then
+				self:AddCardToCollection(CardsData.knCardIdMedic)
+			elseif eClass == GameLib.CodeEnumClass.Spellslinger then
+				self:AddCardToCollection(CardsData.knCardIdSpellslinger)
+			elseif eClass == GameLib.CodeEnumClass.Stalker then
+				self:AddCardToCollection(CardsData.knCardIdStalker)
+			elseif eClass == GameLib.CodeEnumClass.Warrior then
+				self:AddCardToCollection(CardsData.knCardIdWarrior)
+			end
+		end
+	end
 end
 
 function Cards:InitLootFrame()

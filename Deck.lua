@@ -49,7 +49,7 @@ end
 
 function Deck:Initialise( tCollection, tDeck )
 	assert(tCollection ~= nil, "Deck class requires a collection parameter to the constructor.")
-	assert(tCollection ~= nil, "Deck class requires a deck parameter to the constructor.")
+	assert(tDeck ~= nil, "Deck class requires a deck parameter to the constructor.")
 	self.tCollection = tCollection
 	self.tDeck = -- Copy rather than use the passed reference to allow cancellation.
 	{
@@ -255,31 +255,34 @@ end
 function Deck:PopulateDeck()
 	for nIndex = 1, 5 do
 		local nCardId = self.tDeck[nIndex]
-		-- Check that the deck can actually contain this card.
-		local bCanContain = true
-		-- Simple check - are there cards in the collection?
-		if self.tCollection[nCardId] > 0 then
-			-- More in-depth check - does the collection contain enough cards to account for this one, and any in previous deck slots?
-			local nUsedPreviouslyInDeck = 0
-			for nPreviousIndex = 1, nIndex - 1 do
-				if self.tDeck[nPreviousIndex] and self.tDeck[nPreviousIndex] == nCardId then
-					nUsedPreviouslyInDeck = nUsedPreviouslyInDeck + 1
+		-- If there's a valid card ID at the location.
+		if nCardId then
+			-- Check that the deck can actually contain this card.
+			local bCanContain = true
+			-- Simple check - are there cards in the collection?
+			if self.tCollection[nCardId] > 0 then
+				-- More in-depth check - does the collection contain enough cards to account for this one, and any in previous deck slots?
+				local nUsedPreviouslyInDeck = 0
+				for nPreviousIndex = 1, nIndex - 1 do
+					if self.tDeck[nPreviousIndex] and self.tDeck[nPreviousIndex] == nCardId then
+						nUsedPreviouslyInDeck = nUsedPreviouslyInDeck + 1
+					end
 				end
-			end
-			if self.tCollection[nCardId] < nUsedPreviouslyInDeck + 1 then
+				if self.tCollection[nCardId] < nUsedPreviouslyInDeck + 1 then
+					bCanContain = false
+				end
+			else
 				bCanContain = false
 			end
-		else
-			bCanContain = false
-		end
-		if not bCanContain then
-			self.tDeck[nIndex] = nil
-		end
-		
-		if self.tDeck[nIndex] then
-			local wndCardContainer = self.wndMain:FindChild("Card" .. nIndex)
-			local oCard = Card.new(self.tDeck[nIndex], wndCardContainer, true, true, nil, nil, self)
-			oCard.nDeckIndex = nIndex
+			if not bCanContain then
+				self.tDeck[nIndex] = nil
+			end
+			
+			if self.tDeck[nIndex] then
+				local wndCardContainer = self.wndMain:FindChild("Card" .. nIndex)
+				local oCard = Card.new(self.tDeck[nIndex], wndCardContainer, true, true, nil, nil, self)
+				oCard.nDeckIndex = nIndex
+			end
 		end
 	end
 end
