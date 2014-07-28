@@ -1,0 +1,519 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Sprites>
+    <Sprite Name="CardBack" Cycle="1">
+        <Frame Texture="Cards\Images\CardBack.png" x0="0" x1="0" x2="140" x3="140" x4="140" x5="140" y0="0" y1="0" y2="180" y3="180" y4="180" y5="180" Stretchy="1" HotspotX="32" HotspotY="128" Duration="1.000" StartColor="ffffffff" EndColor="ffffffff"/>
+    </Sprite>
+    <Sprite Name="CardGlow" Cycle="1">
+        <Frame Texture="Cards\Images\CardGlow.png" x0="0" x1="0" x2="140" x3="140" x4="140" x5="140" y0="0" y1="0" y2="180" y3="180" y4="180" y5="180" Stretchy="1" HotspotX="32" HotspotY="128" Duration="1.000" StartColor="ffffffff" EndColor="ffffffff"/>
+    </Sprite>
+    <Sprite Name="Challenge" Cycle="1">
+        <Frame Texture="Cards\Images\Challenge.png" x0="0" x1="0" x2="200" x3="200" x4="200" x5="200" y0="0" y1="0" y2="125" y3="125" y4="125" y5="125" Stretchy="1" HotspotX="32" HotspotY="128" Duration="1.000" StartColor="ffffffff" EndColor="ffffffff"/>
+    </Sprite>
+    <Sprite Name="Collection" Cycle="1">
+        <Frame Texture="Cards\Images\Collection.png" x0="0" x1="0" x2="200" x3="200" x4="200" x5="200" y0="0" y1="0" y2="125" y3="125" y4="125" y5="125" Stretchy="1" HotspotX="32" HotspotY="128" Duration="1.000" StartColor="ffffffff" EndColor="ffffffff"/>
+    </Sprite>
+    <Sprite Name="SpeechLeft" Cycle="1">
+        <Frame Texture="Cards\Images\Speech.png" x0="0" x1="0" x2="71" x3="72" x4="299" x5="372" y0="0" y1="0" y2="97" y3="98" y4="214" y5="270" Stretchy="1" HotspotX="0" HotspotY="0" Duration="1.000" StartColor="white" EndColor="white"/>
+    </Sprite>
+    <Sprite Name="SpeechRight" Cycle="1">
+        <Frame Texture="Cards\Images\Speech.png" x0="374" x1="374" x2="374" x3="504" x4="511" x5="746" y0="0" y1="0" y2="0" y3="154" y4="158" y5="270" Stretchy="1" HotspotX="0" HotspotY="0" Duration="1.000" StartColor="white" EndColor="white"/>
+    </Sprite>
+    <Sprite Name="MiniButton" Cycle="1">
+        <Frame Texture="Cards\Images\MiniButton.png" x0="0" x1="0" x2="22" x3="22" x4="22" x5="22" y0="0" y1="0" y2="22" y3="22" y4="22" y5="22" Stretchy="1" HotspotX="11" HotspotY="11" Duration="1.000" StartColor="white" EndColor="white"/>
+    </Sprite>
+    <Sprite Name="Victory" Cycle="1">
+        <Frame Texture="Cards\Images\Victory.png" x0="0" x1="0" x2="431" x3="431" x4="431" x5="431" y0="0" y1="0" y2="70" y3="70" y4="70" y5="70" HotspotX="11" HotspotY="11" Duration="1.000" StartColor="white" EndColor="white"/>
+    </Sprite>
+    <Sprite Name="Defeat" Cycle="1">
+        <Frame Texture="Cards\Images\Defeat.png" x0="0" x1="0" x2="369" x3="369" x4="369" x5="369" y0="0" y1="0" y2="70" y3="70" y4="70" y5="70" HotspotX="11" HotspotY="11" Duration="1.000" StartColor="white" EndColor="white"/>
+    </Sprite>
+    <Sprite Name="Stalemate" Cycle="1">
+        <Frame Texture="Cards\Images\Stalemate.png" x0="0" x1="0" x2="611" x3="611" x4="611" x5="611" y0="0" y1="0" y2="70" y3="70" y4="70" y5="70" HotspotX="11" HotspotY="11" Duration="1.000" StartColor="white" EndColor="white"/>
+    </Sprite>
+    <Sprite Name="001_Hycrest" Cycle="1">
+        <Frame Texture="Cards\Images\Cards.png" x0="0" x1="0" x2="140" x3="140" x4="140" x5="140" y0="0" y1="0" y2="180" y3="180" y4="180" y5="180" Stretchy="1" HotspotX="70" HotspotY="90" Duration="1.000" StartColor="ffffffff" EndColor="ffffffff"/>
+    </Sprite>
+    <Sprite Name="002_RiotVoid" Cycle="1">
+        <Frame Texture="Cards\Images\Cards.png" x0="140" x1="140" x2="280" x3="280" x4="280" x5="280" y0="0" y1="0" y2="180" y3="180" y4="180" y5="180" Stretchy="1" HotspotX="70" HotspotY="90" Duration="1.000" StartColor="ffffffff" EndColor="ffffffff"/>
+    </Sprite>
+    <Sprite Name="003_WarWilds" Cycle="1">
+        <Frame Texture="Cards\Images\Cards.png" x0="280" x1="280" x2="420" x3="420" x4="420" x5="420" y0="0" y1="0" y2="180" y3="180" y4="180" y5="180" Stretchy="1" HotspotX="70" HotspotY="90" Duration="1.000" StartColor="ffffffff" EndColor="ffffffff"/>
+    </Sprite>
+    <Sprite Name="004_SiegeTempestRefuge" Cycle="1">
+        <Frame Texture="Cards\Images\Cards.png" x0="420" x1="420" x2="560" x3="560" x4="560" x5="560" y0="0" y1="0" y2="180" y3="180" y4="180" y5="180" Stretchy="1" HotspotX="70" HotspotY="90" Duration="1.000" StartColor="ffffffff" EndColor="ffffffff"/>
+    </Sprite>
+    <Sprite Name="005_CrimelordsWhitevale" Cycle="1">
+        <Frame Texture="Cards\Images\Cards.png" x0="560" x1="560" x2="700" x3="700" x4="700" x5="700" y0="0" y1="0" y2="180" y3="180" y4="180" y5="180" Stretchy="1" HotspotX="70" HotspotY="90" Duration="1.000" StartColor="ffffffff" EndColor="ffffffff"/>
+    </Sprite>
+    <Sprite Name="006_MalgraveTrail" Cycle="1">
+        <Frame Texture="Cards\Images\Cards.png" x0="700" x1="700" x2="840" x3="840" x4="840" x5="840" y0="0" y1="0" y2="180" y3="180" y4="180" y5="180" Stretchy="1" HotspotX="70" HotspotY="90" Duration="1.000" StartColor="ffffffff" EndColor="ffffffff"/>
+    </Sprite>
+    <Sprite Name="007_Walatiki" Cycle="1">
+        <Frame Texture="Cards\Images\Cards.png" x0="840" x1="840" x2="980" x3="980" x4="980" x5="980" y0="0" y1="0" y2="180" y3="180" y4="180" y5="180" Stretchy="1" HotspotX="70" HotspotY="90" Duration="1.000" StartColor="ffffffff" EndColor="ffffffff"/>
+    </Sprite>
+    <Sprite Name="008_Bloodsworn" Cycle="1">
+        <Frame Texture="Cards\Images\Cards.png" x0="980" x1="980" x2="1120" x3="1120" x4="1120" x5="1120" y0="0" y1="0" y2="180" y3="180" y4="180" y5="180" Stretchy="1" HotspotX="70" HotspotY="90" Duration="1.000" StartColor="ffffffff" EndColor="ffffffff"/>
+    </Sprite>
+    <Sprite Name="009_Engineer" Cycle="1">
+        <Frame Texture="Cards\Images\Cards.png" x0="1120" x1="1120" x2="1260" x3="1260" x4="1260" x5="1260" y0="0" y1="0" y2="180" y3="180" y4="180" y5="180" Stretchy="1" HotspotX="70" HotspotY="90" Duration="1.000" StartColor="ffffffff" EndColor="ffffffff"/>
+    </Sprite>
+    <Sprite Name="010_Esper" Cycle="1">
+        <Frame Texture="Cards\Images\Cards.png" x0="1260" x1="1260" x2="1400" x3="1400" x4="1400" x5="1400" y0="0" y1="0" y2="180" y3="180" y4="180" y5="180" Stretchy="1" HotspotX="70" HotspotY="90" Duration="1.000" StartColor="ffffffff" EndColor="ffffffff"/>
+    </Sprite>
+    <Sprite Name="011_Medic" Cycle="1">
+        <Frame Texture="Cards\Images\Cards.png" x0="1400" x1="1400" x2="1540" x3="1540" x4="1540" x5="1540" y0="0" y1="0" y2="180" y3="180" y4="180" y5="180" Stretchy="1" HotspotX="70" HotspotY="90" Duration="1.000" StartColor="ffffffff" EndColor="ffffffff"/>
+    </Sprite>
+    <Sprite Name="012_Spellslinger" Cycle="1">
+        <Frame Texture="Cards\Images\Cards.png" x0="1540" x1="1540" x2="1680" x3="1680" x4="1680" x5="1680" y0="0" y1="0" y2="180" y3="180" y4="180" y5="180" Stretchy="1" HotspotX="70" HotspotY="90" Duration="1.000" StartColor="ffffffff" EndColor="ffffffff"/>
+    </Sprite>
+    <Sprite Name="013_Stalker" Cycle="1">
+        <Frame Texture="Cards\Images\Cards.png" x0="1680" x1="1680" x2="1820" x3="1820" x4="1820" x5="1820" y0="0" y1="0" y2="180" y3="180" y4="180" y5="180" Stretchy="1" HotspotX="70" HotspotY="90" Duration="1.000" StartColor="ffffffff" EndColor="ffffffff"/>
+    </Sprite>
+    <Sprite Name="014_Warrior" Cycle="1">
+        <Frame Texture="Cards\Images\Cards.png" x0="1820" x1="1820" x2="1960" x3="1960" x4="1960" x5="1960" y0="0" y1="0" y2="180" y3="180" y4="180" y5="180" Stretchy="1" HotspotX="70" HotspotY="90" Duration="1.000" StartColor="ffffffff" EndColor="ffffffff"/>
+    </Sprite>
+    <Sprite Name="015_Augmented" Cycle="1">
+        <Frame Texture="Cards\Images\Cards.png" x0="1960" x1="1960" x2="2100" x3="2100" x4="2100" x5="2100" y0="0" y1="0" y2="180" y3="180" y4="180" y5="180" Stretchy="1" HotspotX="70" HotspotY="90" Duration="1.000" StartColor="ffffffff" EndColor="ffffffff"/>
+    </Sprite>
+    <Sprite Name="016_Augmentor" Cycle="1">
+        <Frame Texture="Cards\Images\Cards.png" x0="2100" x1="2100" x2="2240" x3="2240" x4="2240" x5="2240" y0="0" y1="0" y2="180" y3="180" y4="180" y5="180" Stretchy="1" HotspotX="70" HotspotY="90" Duration="1.000" StartColor="ffffffff" EndColor="ffffffff"/>
+    </Sprite>
+    <Sprite Name="017_BattleBot" Cycle="1">
+        <Frame Texture="Cards\Images\Cards.png" x0="0" x1="0" x2="140" x3="140" x4="140" x5="140" y0="180" y1="180" y2="360" y3="360" y4="360" y5="360" Stretchy="1" HotspotX="70" HotspotY="90" Duration="1.000" StartColor="ffffffff" EndColor="ffffffff"/>
+    </Sprite>
+    <Sprite Name="018_Boulderback" Cycle="1">
+        <Frame Texture="Cards\Images\Cards.png" x0="140" x1="140" x2="280" x3="280" x4="280" x5="280" y0="180" y1="180" y2="360" y3="360" y4="360" y5="360" Stretchy="1" HotspotX="70" HotspotY="90" Duration="1.000" StartColor="ffffffff" EndColor="ffffffff"/>
+    </Sprite>
+    <Sprite Name="019_Buzzbing" Cycle="1">
+        <Frame Texture="Cards\Images\Cards.png" x0="280" x1="280" x2="420" x3="420" x4="420" x5="420" y0="180" y1="180" y2="360" y3="360" y4="360" y5="360" Stretchy="1" HotspotX="70" HotspotY="90" Duration="1.000" StartColor="ffffffff" EndColor="ffffffff"/>
+    </Sprite>
+    <Sprite Name="020_Canimid" Cycle="1">
+        <Frame Texture="Cards\Images\Cards.png" x0="420" x1="420" x2="560" x3="560" x4="560" x5="560" y0="180" y1="180" y2="360" y3="360" y4="360" y5="360" Stretchy="1" HotspotX="70" HotspotY="90" Duration="1.000" StartColor="ffffffff" EndColor="ffffffff"/>
+    </Sprite>
+    <Sprite Name="021_Chompacabra" Cycle="1">
+        <Frame Texture="Cards\Images\Cards.png" x0="560" x1="560" x2="700" x3="700" x4="700" x5="700" y0="180" y1="180" y2="360" y3="360" y4="360" y5="360" Stretchy="1" HotspotX="70" HotspotY="90" Duration="1.000" StartColor="ffffffff" EndColor="ffffffff"/>
+    </Sprite>
+    <Sprite Name="022_Dagun" Cycle="1">
+        <Frame Texture="Cards\Images\Cards.png" x0="700" x1="700" x2="840" x3="840" x4="840" x5="840" y0="180" y1="180" y2="360" y3="360" y4="360" y5="360" Stretchy="1" HotspotX="70" HotspotY="90" Duration="1.000" StartColor="ffffffff" EndColor="ffffffff"/>
+    </Sprite>
+    <Sprite Name="023_Darkspur" Cycle="1">
+        <Frame Texture="Cards\Images\Cards.png" x0="840" x1="840" x2="980" x3="980" x4="980" x5="980" y0="180" y1="180" y2="360" y3="360" y4="360" y5="360" Stretchy="1" HotspotX="70" HotspotY="90" Duration="1.000" StartColor="ffffffff" EndColor="ffffffff"/>
+    </Sprite>
+    <Sprite Name="024_Dreg" Cycle="1">
+        <Frame Texture="Cards\Images\Cards.png" x0="980" x1="980" x2="1120" x3="1120" x4="1120" x5="1120" y0="180" y1="180" y2="360" y3="360" y4="360" y5="360" Stretchy="1" HotspotX="70" HotspotY="90" Duration="1.000" StartColor="ffffffff" EndColor="ffffffff"/>
+    </Sprite>
+    <Sprite Name="025_Drifter" Cycle="1">
+        <Frame Texture="Cards\Images\Cards.png" x0="1120" x1="1120" x2="1260" x3="1260" x4="1260" x5="1260" y0="180" y1="180" y2="360" y3="360" y4="360" y5="360" Stretchy="1" HotspotX="70" HotspotY="90" Duration="1.000" StartColor="ffffffff" EndColor="ffffffff"/>
+    </Sprite>
+    <Sprite Name="026_Elemental" Cycle="1">
+        <Frame Texture="Cards\Images\Cards.png" x0="1260" x1="1260" x2="1400" x3="1400" x4="1400" x5="1400" y0="180" y1="180" y2="360" y3="360" y4="360" y5="360" Stretchy="1" HotspotX="70" HotspotY="90" Duration="1.000" StartColor="ffffffff" EndColor="ffffffff"/>
+    </Sprite>
+    <Sprite Name="027_Falkrin" Cycle="1">
+        <Frame Texture="Cards\Images\Cards.png" x0="1400" x1="1400" x2="1540" x3="1540" x4="1540" x5="1540" y0="180" y1="180" y2="360" y3="360" y4="360" y5="360" Stretchy="1" HotspotX="70" HotspotY="90" Duration="1.000" StartColor="ffffffff" EndColor="ffffffff"/>
+    </Sprite>
+    <Sprite Name="028_Freebot" Cycle="1">
+        <Frame Texture="Cards\Images\Cards.png" x0="1540" x1="1540" x2="1680" x3="1680" x4="1680" x5="1680" y0="180" y1="180" y2="360" y3="360" y4="360" y5="360" Stretchy="1" HotspotX="70" HotspotY="90" Duration="1.000" StartColor="ffffffff" EndColor="ffffffff"/>
+    </Sprite>
+    <Sprite Name="029_Garr" Cycle="1">
+        <Frame Texture="Cards\Images\Cards.png" x0="1680" x1="1680" x2="1820" x3="1820" x4="1820" x5="1820" y0="180" y1="180" y2="360" y3="360" y4="360" y5="360" Stretchy="1" HotspotX="70" HotspotY="90" Duration="1.000" StartColor="ffffffff" EndColor="ffffffff"/>
+    </Sprite>
+    <Sprite Name="030_Giant" Cycle="1">
+        <Frame Texture="Cards\Images\Cards.png" x0="1820" x1="1820" x2="1960" x3="1960" x4="1960" x5="1960" y0="180" y1="180" y2="360" y3="360" y4="360" y5="360" Stretchy="1" HotspotX="70" HotspotY="90" Duration="1.000" StartColor="ffffffff" EndColor="ffffffff"/>
+    </Sprite>
+    <Sprite Name="031_Girrok" Cycle="1">
+        <Frame Texture="Cards\Images\Cards.png" x0="1960" x1="1960" x2="2100" x3="2100" x4="2100" x5="2100" y0="180" y1="180" y2="360" y3="360" y4="360" y5="360" Stretchy="1" HotspotX="70" HotspotY="90" Duration="1.000" StartColor="ffffffff" EndColor="ffffffff"/>
+    </Sprite>
+    <Sprite Name="032_Gorganoth" Cycle="1">
+        <Frame Texture="Cards\Images\Cards.png" x0="2100" x1="2100" x2="2240" x3="2240" x4="2240" x5="2240" y0="180" y1="180" y2="360" y3="360" y4="360" y5="360" Stretchy="1" HotspotX="70" HotspotY="90" Duration="1.000" StartColor="ffffffff" EndColor="ffffffff"/>
+    </Sprite>
+    <Sprite Name="033_Gronyx" Cycle="1">
+        <Frame Texture="Cards\Images\Cards.png" x0="0" x1="0" x2="140" x3="140" x4="140" x5="140" y0="360" y1="360" y2="540" y3="540" y4="540" y5="540" Stretchy="1" HotspotX="70" HotspotY="90" Duration="1.000" StartColor="ffffffff" EndColor="ffffffff"/>
+    </Sprite>
+    <Sprite Name="034_Heynar" Cycle="1">
+        <Frame Texture="Cards\Images\Cards.png" x0="140" x1="140" x2="280" x3="280" x4="280" x5="280" y0="360" y1="360" y2="540" y3="540" y4="540" y5="540" Stretchy="1" HotspotX="70" HotspotY="90" Duration="1.000" StartColor="ffffffff" EndColor="ffffffff"/>
+    </Sprite>
+    <Sprite Name="035_Hookfoot" Cycle="1">
+        <Frame Texture="Cards\Images\Cards.png" x0="280" x1="280" x2="420" x3="420" x4="420" x5="420" y0="360" y1="360" y2="540" y3="540" y4="540" y5="540" Stretchy="1" HotspotX="70" HotspotY="90" Duration="1.000" StartColor="ffffffff" EndColor="ffffffff"/>
+    </Sprite>
+    <Sprite Name="036_Ikthian" Cycle="1">
+        <Frame Texture="Cards\Images\Cards.png" x0="420" x1="420" x2="560" x3="560" x4="560" x5="560" y0="360" y1="360" y2="540" y3="540" y4="540" y5="540" Stretchy="1" HotspotX="70" HotspotY="90" Duration="1.000" StartColor="ffffffff" EndColor="ffffffff"/>
+    </Sprite>
+    <Sprite Name="037_IkthianBrawler" Cycle="1">
+        <Frame Texture="Cards\Images\Cards.png" x0="560" x1="560" x2="700" x3="700" x4="700" x5="700" y0="360" y1="360" y2="540" y3="540" y4="540" y5="540" Stretchy="1" HotspotX="70" HotspotY="90" Duration="1.000" StartColor="ffffffff" EndColor="ffffffff"/>
+    </Sprite>
+    <Sprite Name="038_Kurg" Cycle="1">
+        <Frame Texture="Cards\Images\Cards.png" x0="700" x1="700" x2="840" x3="840" x4="840" x5="840" y0="360" y1="360" y2="540" y3="540" y4="540" y5="540" Stretchy="1" HotspotX="70" HotspotY="90" Duration="1.000" StartColor="ffffffff" EndColor="ffffffff"/>
+    </Sprite>
+    <Sprite Name="039_Longsnout" Cycle="1">
+        <Frame Texture="Cards\Images\Cards.png" x0="840" x1="840" x2="980" x3="980" x4="980" x5="980" y0="360" y1="360" y2="540" y3="540" y4="540" y5="540" Stretchy="1" HotspotX="70" HotspotY="90" Duration="1.000" StartColor="ffffffff" EndColor="ffffffff"/>
+    </Sprite>
+    <Sprite Name="040_Malverine" Cycle="1">
+        <Frame Texture="Cards\Images\Cards.png" x0="980" x1="980" x2="1120" x3="1120" x4="1120" x5="1120" y0="360" y1="360" y2="540" y3="540" y4="540" y5="540" Stretchy="1" HotspotX="70" HotspotY="90" Duration="1.000" StartColor="ffffffff" EndColor="ffffffff"/>
+    </Sprite>
+    <Sprite Name="041_Mammodin" Cycle="1">
+        <Frame Texture="Cards\Images\Cards.png" x0="1120" x1="1120" x2="1260" x3="1260" x4="1260" x5="1260" y0="360" y1="360" y2="540" y3="540" y4="540" y5="540" Stretchy="1" HotspotX="70" HotspotY="90" Duration="1.000" StartColor="ffffffff" EndColor="ffffffff"/>
+    </Sprite>
+    <Sprite Name="042_Moodie" Cycle="1">
+        <Frame Texture="Cards\Images\Cards.png" x0="1260" x1="1260" x2="1400" x3="1400" x4="1400" x5="1400" y0="360" y1="360" y2="540" y3="540" y4="540" y5="540" Stretchy="1" HotspotX="70" HotspotY="90" Duration="1.000" StartColor="ffffffff" EndColor="ffffffff"/>
+    </Sprite>
+    <Sprite Name="043_Murgh" Cycle="1">
+        <Frame Texture="Cards\Images\Cards.png" x0="1400" x1="1400" x2="1540" x3="1540" x4="1540" x5="1540" y0="360" y1="360" y2="540" y3="540" y4="540" y5="540" Stretchy="1" HotspotX="70" HotspotY="90" Duration="1.000" StartColor="ffffffff" EndColor="ffffffff"/>
+    </Sprite>
+    <Sprite Name="044_Orbitog" Cycle="1">
+        <Frame Texture="Cards\Images\Cards.png" x0="1540" x1="1540" x2="1680" x3="1680" x4="1680" x5="1680" y0="360" y1="360" y2="540" y3="540" y4="540" y5="540" Stretchy="1" HotspotX="70" HotspotY="90" Duration="1.000" StartColor="ffffffff" EndColor="ffffffff"/>
+    </Sprite>
+    <Sprite Name="045_Osun" Cycle="1">
+        <Frame Texture="Cards\Images\Cards.png" x0="1680" x1="1680" x2="1820" x3="1820" x4="1820" x5="1820" y0="360" y1="360" y2="540" y3="540" y4="540" y5="540" Stretchy="1" HotspotX="70" HotspotY="90" Duration="1.000" StartColor="ffffffff" EndColor="ffffffff"/>
+    </Sprite>
+    <Sprite Name="046_Pell" Cycle="1">
+        <Frame Texture="Cards\Images\Cards.png" x0="1820" x1="1820" x2="1960" x3="1960" x4="1960" x5="1960" y0="360" y1="360" y2="540" y3="540" y4="540" y5="540" Stretchy="1" HotspotX="70" HotspotY="90" Duration="1.000" StartColor="ffffffff" EndColor="ffffffff"/>
+    </Sprite>
+    <Sprite Name="047_Probe" Cycle="1">
+        <Frame Texture="Cards\Images\Cards.png" x0="1960" x1="1960" x2="2100" x3="2100" x4="2100" x5="2100" y0="360" y1="360" y2="540" y3="540" y4="540" y5="540" Stretchy="1" HotspotX="70" HotspotY="90" Duration="1.000" StartColor="ffffffff" EndColor="ffffffff"/>
+    </Sprite>
+    <Sprite Name="048_Protector" Cycle="1">
+        <Frame Texture="Cards\Images\Cards.png" x0="2100" x1="2100" x2="2240" x3="2240" x4="2240" x5="2240" y0="360" y1="360" y2="540" y3="540" y4="540" y5="540" Stretchy="1" HotspotX="70" HotspotY="90" Duration="1.000" StartColor="ffffffff" EndColor="ffffffff"/>
+    </Sprite>
+    <Sprite Name="049_Pumera" Cycle="1">
+        <Frame Texture="Cards\Images\Cards.png" x0="0" x1="0" x2="140" x3="140" x4="140" x5="140" y0="540" y1="540" y2="720" y3="720" y4="720" y5="720" Stretchy="1" HotspotX="70" HotspotY="90" Duration="1.000" StartColor="ffffffff" EndColor="ffffffff"/>
+    </Sprite>
+    <Sprite Name="050_Ravenok" Cycle="1">
+        <Frame Texture="Cards\Images\Cards.png" x0="140" x1="140" x2="280" x3="280" x4="280" x5="280" y0="540" y1="540" y2="720" y3="720" y4="720" y5="720" Stretchy="1" HotspotX="70" HotspotY="90" Duration="1.000" StartColor="ffffffff" EndColor="ffffffff"/>
+    </Sprite>
+    <Sprite Name="051_Razortail" Cycle="1">
+        <Frame Texture="Cards\Images\Cards.png" x0="280" x1="280" x2="420" x3="420" x4="420" x5="420" y0="540" y1="540" y2="720" y3="720" y4="720" y5="720" Stretchy="1" HotspotX="70" HotspotY="90" Duration="1.000" StartColor="ffffffff" EndColor="ffffffff"/>
+    </Sprite>
+    <Sprite Name="052_Razortusk" Cycle="1">
+        <Frame Texture="Cards\Images\Cards.png" x0="420" x1="420" x2="560" x3="560" x4="560" x5="560" y0="540" y1="540" y2="720" y3="720" y4="720" y5="720" Stretchy="1" HotspotX="70" HotspotY="90" Duration="1.000" StartColor="ffffffff" EndColor="ffffffff"/>
+    </Sprite>
+    <Sprite Name="053_Roan" Cycle="1">
+        <Frame Texture="Cards\Images\Cards.png" x0="560" x1="560" x2="700" x3="700" x4="700" x5="700" y0="540" y1="540" y2="720" y3="720" y4="720" y5="720" Stretchy="1" HotspotX="70" HotspotY="90" Duration="1.000" StartColor="ffffffff" EndColor="ffffffff"/>
+    </Sprite>
+    <Sprite Name="054_Rockhorde" Cycle="1">
+        <Frame Texture="Cards\Images\Cards.png" x0="700" x1="700" x2="840" x3="840" x4="840" x5="840" y0="540" y1="540" y2="720" y3="720" y4="720" y5="720" Stretchy="1" HotspotX="70" HotspotY="90" Duration="1.000" StartColor="ffffffff" EndColor="ffffffff"/>
+    </Sprite>
+    <Sprite Name="055_Rootbrute" Cycle="1">
+        <Frame Texture="Cards\Images\Cards.png" x0="840" x1="840" x2="980" x3="980" x4="980" x5="980" y0="540" y1="540" y2="720" y3="720" y4="720" y5="720" Stretchy="1" HotspotX="70" HotspotY="90" Duration="1.000" StartColor="ffffffff" EndColor="ffffffff"/>
+    </Sprite>
+    <Sprite Name="056_Scrab" Cycle="1">
+        <Frame Texture="Cards\Images\Cards.png" x0="980" x1="980" x2="1120" x3="1120" x4="1120" x5="1120" y0="540" y1="540" y2="720" y3="720" y4="720" y5="720" Stretchy="1" HotspotX="70" HotspotY="90" Duration="1.000" StartColor="ffffffff" EndColor="ffffffff"/>
+    </Sprite>
+    <Sprite Name="057_Skeech" Cycle="1">
+        <Frame Texture="Cards\Images\Cards.png" x0="1120" x1="1120" x2="1260" x3="1260" x4="1260" x5="1260" y0="540" y1="540" y2="720" y3="720" y4="720" y5="720" Stretchy="1" HotspotX="70" HotspotY="90" Duration="1.000" StartColor="ffffffff" EndColor="ffffffff"/>
+    </Sprite>
+    <Sprite Name="058_Snoglug" Cycle="1">
+        <Frame Texture="Cards\Images\Cards.png" x0="1260" x1="1260" x2="1400" x3="1400" x4="1400" x5="1400" y0="540" y1="540" y2="720" y3="720" y4="720" y5="720" Stretchy="1" HotspotX="70" HotspotY="90" Duration="1.000" StartColor="ffffffff" EndColor="ffffffff"/>
+    </Sprite>
+    <Sprite Name="059_Spider" Cycle="1">
+        <Frame Texture="Cards\Images\Cards.png" x0="1400" x1="1400" x2="1540" x3="1540" x4="1540" x5="1540" y0="540" y1="540" y2="720" y3="720" y4="720" y5="720" Stretchy="1" HotspotX="70" HotspotY="90" Duration="1.000" StartColor="ffffffff" EndColor="ffffffff"/>
+    </Sprite>
+    <Sprite Name="060_Spiderbot" Cycle="1">
+        <Frame Texture="Cards\Images\Cards.png" x0="1540" x1="1540" x2="1680" x3="1680" x4="1680" x5="1680" y0="540" y1="540" y2="720" y3="720" y4="720" y5="720" Stretchy="1" HotspotX="70" HotspotY="90" Duration="1.000" StartColor="ffffffff" EndColor="ffffffff"/>
+    </Sprite>
+    <Sprite Name="061_Spiderling" Cycle="1">
+        <Frame Texture="Cards\Images\Cards.png" x0="1680" x1="1680" x2="1820" x3="1820" x4="1820" x5="1820" y0="540" y1="540" y2="720" y3="720" y4="720" y5="720" Stretchy="1" HotspotX="70" HotspotY="90" Duration="1.000" StartColor="ffffffff" EndColor="ffffffff"/>
+    </Sprite>
+    <Sprite Name="062_Squirg" Cycle="1">
+        <Frame Texture="Cards\Images\Cards.png" x0="1820" x1="1820" x2="1960" x3="1960" x4="1960" x5="1960" y0="540" y1="540" y2="720" y3="720" y4="720" y5="720" Stretchy="1" HotspotX="70" HotspotY="90" Duration="1.000" StartColor="ffffffff" EndColor="ffffffff"/>
+    </Sprite>
+    <Sprite Name="063_Stag" Cycle="1">
+        <Frame Texture="Cards\Images\Cards.png" x0="1960" x1="1960" x2="2100" x3="2100" x4="2100" x5="2100" y0="540" y1="540" y2="720" y3="720" y4="720" y5="720" Stretchy="1" HotspotX="70" HotspotY="90" Duration="1.000" StartColor="ffffffff" EndColor="ffffffff"/>
+    </Sprite>
+    <Sprite Name="064_Steamglider" Cycle="1">
+        <Frame Texture="Cards\Images\Cards.png" x0="2100" x1="2100" x2="2240" x3="2240" x4="2240" x5="2240" y0="540" y1="540" y2="720" y3="720" y4="720" y5="720" Stretchy="1" HotspotX="70" HotspotY="90" Duration="1.000" StartColor="ffffffff" EndColor="ffffffff"/>
+    </Sprite>
+    <Sprite Name="065_Stemdragon" Cycle="1">
+        <Frame Texture="Cards\Images\Cards.png" x0="0" x1="0" x2="140" x3="140" x4="140" x5="140" y0="720" y1="720" y2="900" y3="900" y4="900" y5="900" Stretchy="1" HotspotX="70" HotspotY="90" Duration="1.000" StartColor="ffffffff" EndColor="ffffffff"/>
+    </Sprite>
+    <Sprite Name="066_Strain" Cycle="1">
+        <Frame Texture="Cards\Images\Cards.png" x0="140" x1="140" x2="280" x3="280" x4="280" x5="280" y0="720" y1="720" y2="900" y3="900" y4="900" y5="900" Stretchy="1" HotspotX="70" HotspotY="90" Duration="1.000" StartColor="ffffffff" EndColor="ffffffff"/>
+    </Sprite>
+    <Sprite Name="067_Stumpkin" Cycle="1">
+        <Frame Texture="Cards\Images\Cards.png" x0="280" x1="280" x2="420" x3="420" x4="420" x5="420" y0="720" y1="720" y2="900" y3="900" y4="900" y5="900" Stretchy="1" HotspotX="70" HotspotY="90" Duration="1.000" StartColor="ffffffff" EndColor="ffffffff"/>
+    </Sprite>
+    <Sprite Name="068_Terminite" Cycle="1">
+        <Frame Texture="Cards\Images\Cards.png" x0="420" x1="420" x2="560" x3="560" x4="560" x5="560" y0="720" y1="720" y2="900" y3="900" y4="900" y5="900" Stretchy="1" HotspotX="70" HotspotY="90" Duration="1.000" StartColor="ffffffff" EndColor="ffffffff"/>
+    </Sprite>
+    <Sprite Name="069_Torine" Cycle="1">
+        <Frame Texture="Cards\Images\Cards.png" x0="560" x1="560" x2="700" x3="700" x4="700" x5="700" y0="720" y1="720" y2="900" y3="900" y4="900" y5="900" Stretchy="1" HotspotX="70" HotspotY="90" Duration="1.000" StartColor="ffffffff" EndColor="ffffffff"/>
+    </Sprite>
+    <Sprite Name="070_Vulcarrion" Cycle="1">
+        <Frame Texture="Cards\Images\Cards.png" x0="700" x1="700" x2="840" x3="840" x4="840" x5="840" y0="720" y1="720" y2="900" y3="900" y4="900" y5="900" Stretchy="1" HotspotX="70" HotspotY="90" Duration="1.000" StartColor="ffffffff" EndColor="ffffffff"/>
+    </Sprite>
+    <Sprite Name="071_Yeti" Cycle="1">
+        <Frame Texture="Cards\Images\Cards.png" x0="840" x1="840" x2="980" x3="980" x4="980" x5="980" y0="720" y1="720" y2="900" y3="900" y4="900" y5="900" Stretchy="1" HotspotX="70" HotspotY="90" Duration="1.000" StartColor="ffffffff" EndColor="ffffffff"/>
+    </Sprite>
+    <Sprite Name="072_Cubig" Cycle="1">
+        <Frame Texture="Cards\Images\Cards.png" x0="980" x1="980" x2="1120" x3="1120" x4="1120" x5="1120" y0="720" y1="720" y2="900" y3="900" y4="900" y5="900" Stretchy="1" HotspotX="70" HotspotY="90" Duration="1.000" StartColor="ffffffff" EndColor="ffffffff"/>
+    </Sprite>
+    <Sprite Name="073_Frizlet" Cycle="1">
+        <Frame Texture="Cards\Images\Cards.png" x0="1120" x1="1120" x2="1260" x3="1260" x4="1260" x5="1260" y0="720" y1="720" y2="900" y3="900" y4="900" y5="900" Stretchy="1" HotspotX="70" HotspotY="90" Duration="1.000" StartColor="ffffffff" EndColor="ffffffff"/>
+    </Sprite>
+    <Sprite Name="074_Jabbit" Cycle="1">
+        <Frame Texture="Cards\Images\Cards.png" x0="1260" x1="1260" x2="1400" x3="1400" x4="1400" x5="1400" y0="720" y1="720" y2="900" y3="900" y4="900" y5="900" Stretchy="1" HotspotX="70" HotspotY="90" Duration="1.000" StartColor="ffffffff" EndColor="ffffffff"/>
+    </Sprite>
+    <Sprite Name="075_Rowsdowser" Cycle="1">
+        <Frame Texture="Cards\Images\Cards.png" x0="1400" x1="1400" x2="1540" x3="1540" x4="1540" x5="1540" y0="720" y1="720" y2="900" y3="900" y4="900" y5="900" Stretchy="1" HotspotX="70" HotspotY="90" Duration="1.000" StartColor="ffffffff" EndColor="ffffffff"/>
+    </Sprite>
+    <Sprite Name="076_Slank" Cycle="1">
+        <Frame Texture="Cards\Images\Cards.png" x0="1540" x1="1540" x2="1680" x3="1680" x4="1680" x5="1680" y0="720" y1="720" y2="900" y3="900" y4="900" y5="900" Stretchy="1" HotspotX="70" HotspotY="90" Duration="1.000" StartColor="ffffffff" EndColor="ffffffff"/>
+    </Sprite>
+    <Sprite Name="077_Splorg" Cycle="1">
+        <Frame Texture="Cards\Images\Cards.png" x0="1680" x1="1680" x2="1820" x3="1820" x4="1820" x5="1820" y0="720" y1="720" y2="900" y3="900" y4="900" y5="900" Stretchy="1" HotspotX="70" HotspotY="90" Duration="1.000" StartColor="ffffffff" EndColor="ffffffff"/>
+    </Sprite>
+    <Sprite Name="078_Veggie" Cycle="1">
+        <Frame Texture="Cards\Images\Cards.png" x0="1820" x1="1820" x2="1960" x3="1960" x4="1960" x5="1960" y0="720" y1="720" y2="900" y3="900" y4="900" y5="900" Stretchy="1" HotspotX="70" HotspotY="90" Duration="1.000" StartColor="ffffffff" EndColor="ffffffff"/>
+    </Sprite>
+    <Sprite Name="079_Vind" Cycle="1">
+        <Frame Texture="Cards\Images\Cards.png" x0="1960" x1="1960" x2="2100" x3="2100" x4="2100" x5="2100" y0="720" y1="720" y2="900" y3="900" y4="900" y5="900" Stretchy="1" HotspotX="70" HotspotY="90" Duration="1.000" StartColor="ffffffff" EndColor="ffffffff"/>
+    </Sprite>
+    <Sprite Name="080_Dominion" Cycle="1">
+        <Frame Texture="Cards\Images\Cards.png" x0="2100" x1="2100" x2="2240" x3="2240" x4="2240" x5="2240" y0="720" y1="720" y2="900" y3="900" y4="900" y5="900" Stretchy="1" HotspotX="70" HotspotY="90" Duration="1.000" StartColor="ffffffff" EndColor="ffffffff"/>
+    </Sprite>
+    <Sprite Name="081_AgentLex" Cycle="1">
+        <Frame Texture="Cards\Images\Cards.png" x0="0" x1="0" x2="140" x3="140" x4="140" x5="140" y0="900" y1="900" y2="1080" y3="1080" y4="1080" y5="1080" Stretchy="1" HotspotX="70" HotspotY="90" Duration="1.000" StartColor="ffffffff" EndColor="ffffffff"/>
+    </Sprite>
+    <Sprite Name="082_ArtemisZin" Cycle="1">
+        <Frame Texture="Cards\Images\Cards.png" x0="140" x1="140" x2="280" x3="280" x4="280" x5="280" y0="900" y1="900" y2="1080" y3="1080" y4="1080" y5="1080" Stretchy="1" HotspotX="70" HotspotY="90" Duration="1.000" StartColor="ffffffff" EndColor="ffffffff"/>
+    </Sprite>
+    <Sprite Name="083_CorriganDoon" Cycle="1">
+        <Frame Texture="Cards\Images\Cards.png" x0="280" x1="280" x2="420" x3="420" x4="420" x5="420" y0="900" y1="900" y2="1080" y3="1080" y4="1080" y5="1080" Stretchy="1" HotspotX="70" HotspotY="90" Duration="1.000" StartColor="ffffffff" EndColor="ffffffff"/>
+    </Sprite>
+    <Sprite Name="084_EmperorMyrcalus" Cycle="1">
+        <Frame Texture="Cards\Images\Cards.png" x0="420" x1="420" x2="560" x3="560" x4="560" x5="560" y0="900" y1="900" y2="1080" y3="1080" y4="1080" y5="1080" Stretchy="1" HotspotX="70" HotspotY="90" Duration="1.000" StartColor="ffffffff" EndColor="ffffffff"/>
+    </Sprite>
+    <Sprite Name="085_KezrekWarbringer" Cycle="1">
+        <Frame Texture="Cards\Images\Cards.png" x0="560" x1="560" x2="700" x3="700" x4="700" x5="700" y0="900" y1="900" y2="1080" y3="1080" y4="1080" y5="1080" Stretchy="1" HotspotX="70" HotspotY="90" Duration="1.000" StartColor="ffffffff" EndColor="ffffffff"/>
+    </Sprite>
+    <Sprite Name="086_MalvolioPortius" Cycle="1">
+        <Frame Texture="Cards\Images\Cards.png" x0="700" x1="700" x2="840" x3="840" x4="840" x5="840" y0="900" y1="900" y2="1080" y3="1080" y4="1080" y5="1080" Stretchy="1" HotspotX="70" HotspotY="90" Duration="1.000" StartColor="ffffffff" EndColor="ffffffff"/>
+    </Sprite>
+    <Sprite Name="087_MondoZax" Cycle="1">
+        <Frame Texture="Cards\Images\Cards.png" x0="840" x1="840" x2="980" x3="980" x4="980" x5="980" y0="900" y1="900" y2="1080" y3="1080" y4="1080" y5="1080" Stretchy="1" HotspotX="70" HotspotY="90" Duration="1.000" StartColor="ffffffff" EndColor="ffffffff"/>
+    </Sprite>
+    <Sprite Name="088_ToricAntevian" Cycle="1">
+        <Frame Texture="Cards\Images\Cards.png" x0="980" x1="980" x2="1120" x3="1120" x4="1120" x5="1120" y0="900" y1="900" y2="1080" y3="1080" y4="1080" y5="1080" Stretchy="1" HotspotX="70" HotspotY="90" Duration="1.000" StartColor="ffffffff" EndColor="ffffffff"/>
+    </Sprite>
+    <Sprite Name="089_Cassian" Cycle="1">
+        <Frame Texture="Cards\Images\Cards.png" x0="1120" x1="1120" x2="1260" x3="1260" x4="1260" x5="1260" y0="900" y1="900" y2="1080" y3="1080" y4="1080" y5="1080" Stretchy="1" HotspotX="70" HotspotY="90" Duration="1.000" StartColor="ffffffff" EndColor="ffffffff"/>
+    </Sprite>
+    <Sprite Name="090_Chua" Cycle="1">
+        <Frame Texture="Cards\Images\Cards.png" x0="1260" x1="1260" x2="1400" x3="1400" x4="1400" x5="1400" y0="900" y1="900" y2="1080" y3="1080" y4="1080" y5="1080" Stretchy="1" HotspotX="70" HotspotY="90" Duration="1.000" StartColor="ffffffff" EndColor="ffffffff"/>
+    </Sprite>
+    <Sprite Name="091_Draken" Cycle="1">
+        <Frame Texture="Cards\Images\Cards.png" x0="1400" x1="1400" x2="1540" x3="1540" x4="1540" x5="1540" y0="900" y1="900" y2="1080" y3="1080" y4="1080" y5="1080" Stretchy="1" HotspotX="70" HotspotY="90" Duration="1.000" StartColor="ffffffff" EndColor="ffffffff"/>
+    </Sprite>
+    <Sprite Name="092_Mechari" Cycle="1">
+        <Frame Texture="Cards\Images\Cards.png" x0="1540" x1="1540" x2="1680" x3="1680" x4="1680" x5="1680" y0="900" y1="900" y2="1080" y3="1080" y4="1080" y5="1080" Stretchy="1" HotspotX="70" HotspotY="90" Duration="1.000" StartColor="ffffffff" EndColor="ffffffff"/>
+    </Sprite>
+    <Sprite Name="093_DominionWarbot" Cycle="1">
+        <Frame Texture="Cards\Images\Cards.png" x0="1680" x1="1680" x2="1820" x3="1820" x4="1820" x5="1820" y0="900" y1="900" y2="1080" y3="1080" y4="1080" y5="1080" Stretchy="1" HotspotX="70" HotspotY="90" Duration="1.000" StartColor="ffffffff" EndColor="ffffffff"/>
+    </Sprite>
+    <Sprite Name="094_StormtalonsLair" Cycle="1">
+        <Frame Texture="Cards\Images\Cards.png" x0="1820" x1="1820" x2="1960" x3="1960" x4="1960" x5="1960" y0="900" y1="900" y2="1080" y3="1080" y4="1080" y5="1080" Stretchy="1" HotspotX="70" HotspotY="90" Duration="1.000" StartColor="ffffffff" EndColor="ffffffff"/>
+    </Sprite>
+    <Sprite Name="095_KelVorath" Cycle="1">
+        <Frame Texture="Cards\Images\Cards.png" x0="1960" x1="1960" x2="2100" x3="2100" x4="2100" x5="2100" y0="900" y1="900" y2="1080" y3="1080" y4="1080" y5="1080" Stretchy="1" HotspotX="70" HotspotY="90" Duration="1.000" StartColor="ffffffff" EndColor="ffffffff"/>
+    </Sprite>
+    <Sprite Name="096_Skullcano" Cycle="1">
+        <Frame Texture="Cards\Images\Cards.png" x0="2100" x1="2100" x2="2240" x3="2240" x4="2240" x5="2240" y0="900" y1="900" y2="1080" y3="1080" y4="1080" y5="1080" Stretchy="1" HotspotX="70" HotspotY="90" Duration="1.000" StartColor="ffffffff" EndColor="ffffffff"/>
+    </Sprite>
+    <Sprite Name="097_SanctuarySwordmaiden" Cycle="1">
+        <Frame Texture="Cards\Images\Cards.png" x0="0" x1="0" x2="140" x3="140" x4="140" x5="140" y0="1080" y1="1080" y2="1260" y3="1260" y4="1260" y5="1260" Stretchy="1" HotspotX="70" HotspotY="90" Duration="1.000" StartColor="ffffffff" EndColor="ffffffff"/>
+    </Sprite>
+    <Sprite Name="098_Exiles" Cycle="1">
+        <Frame Texture="Cards\Images\Cards.png" x0="140" x1="140" x2="280" x3="280" x4="280" x5="280" y0="1080" y1="1080" y2="1260" y3="1260" y4="1260" y5="1260" Stretchy="1" HotspotX="70" HotspotY="90" Duration="1.000" StartColor="ffffffff" EndColor="ffffffff"/>
+    </Sprite>
+    <Sprite Name="099_AvraDarkos" Cycle="1">
+        <Frame Texture="Cards\Images\Cards.png" x0="280" x1="280" x2="420" x3="420" x4="420" x5="420" y0="1080" y1="1080" y2="1260" y3="1260" y4="1260" y5="1260" Stretchy="1" HotspotX="70" HotspotY="90" Duration="1.000" StartColor="ffffffff" EndColor="ffffffff"/>
+    </Sprite>
+    <Sprite Name="100_DeadeyeBrightland" Cycle="1">
+        <Frame Texture="Cards\Images\Cards.png" x0="420" x1="420" x2="560" x3="560" x4="560" x5="560" y0="1080" y1="1080" y2="1260" y3="1260" y4="1260" y5="1260" Stretchy="1" HotspotX="70" HotspotY="90" Duration="1.000" StartColor="ffffffff" EndColor="ffffffff"/>
+    </Sprite>
+    <Sprite Name="101_DorianWalker" Cycle="1">
+        <Frame Texture="Cards\Images\Cards.png" x0="560" x1="560" x2="700" x3="700" x4="700" x5="700" y0="1080" y1="1080" y2="1260" y3="1260" y4="1260" y5="1260" Stretchy="1" HotspotX="70" HotspotY="90" Duration="1.000" StartColor="ffffffff" EndColor="ffffffff"/>
+    </Sprite>
+    <Sprite Name="102_DurekStonebreaker" Cycle="1">
+        <Frame Texture="Cards\Images\Cards.png" x0="700" x1="700" x2="840" x3="840" x4="840" x5="840" y0="1080" y1="1080" y2="1260" y3="1260" y4="1260" y5="1260" Stretchy="1" HotspotX="70" HotspotY="90" Duration="1.000" StartColor="ffffffff" EndColor="ffffffff"/>
+    </Sprite>
+    <Sprite Name="103_JudgeKain" Cycle="1">
+        <Frame Texture="Cards\Images\Cards.png" x0="840" x1="840" x2="980" x3="980" x4="980" x5="980" y0="1080" y1="1080" y2="1260" y3="1260" y4="1260" y5="1260" Stretchy="1" HotspotX="70" HotspotY="90" Duration="1.000" StartColor="ffffffff" EndColor="ffffffff"/>
+    </Sprite>
+    <Sprite Name="104_KitBrinny" Cycle="1">
+        <Frame Texture="Cards\Images\Cards.png" x0="980" x1="980" x2="1120" x3="1120" x4="1120" x5="1120" y0="1080" y1="1080" y2="1260" y3="1260" y4="1260" y5="1260" Stretchy="1" HotspotX="70" HotspotY="90" Duration="1.000" StartColor="ffffffff" EndColor="ffffffff"/>
+    </Sprite>
+    <Sprite Name="105_QueenMyalaEverstar" Cycle="1">
+        <Frame Texture="Cards\Images\Cards.png" x0="1120" x1="1120" x2="1260" x3="1260" x4="1260" x5="1260" y0="1080" y1="1080" y2="1260" y3="1260" y4="1260" y5="1260" Stretchy="1" HotspotX="70" HotspotY="90" Duration="1.000" StartColor="ffffffff" EndColor="ffffffff"/>
+    </Sprite>
+    <Sprite Name="106_VictorLazarin" Cycle="1">
+        <Frame Texture="Cards\Images\Cards.png" x0="1260" x1="1260" x2="1400" x3="1400" x4="1400" x5="1400" y0="1080" y1="1080" y2="1260" y3="1260" y4="1260" y5="1260" Stretchy="1" HotspotX="70" HotspotY="90" Duration="1.000" StartColor="ffffffff" EndColor="ffffffff"/>
+    </Sprite>
+    <Sprite Name="107_Aurin" Cycle="1">
+        <Frame Texture="Cards\Images\Cards.png" x0="1400" x1="1400" x2="1540" x3="1540" x4="1540" x5="1540" y0="1080" y1="1080" y2="1260" y3="1260" y4="1260" y5="1260" Stretchy="1" HotspotX="70" HotspotY="90" Duration="1.000" StartColor="ffffffff" EndColor="ffffffff"/>
+    </Sprite>
+    <Sprite Name="108_Granok" Cycle="1">
+        <Frame Texture="Cards\Images\Cards.png" x0="1540" x1="1540" x2="1680" x3="1680" x4="1680" x5="1680" y0="1080" y1="1080" y2="1260" y3="1260" y4="1260" y5="1260" Stretchy="1" HotspotX="70" HotspotY="90" Duration="1.000" StartColor="ffffffff" EndColor="ffffffff"/>
+    </Sprite>
+    <Sprite Name="109_Human" Cycle="1">
+        <Frame Texture="Cards\Images\Cards.png" x0="1680" x1="1680" x2="1820" x3="1820" x4="1820" x5="1820" y0="1080" y1="1080" y2="1260" y3="1260" y4="1260" y5="1260" Stretchy="1" HotspotX="70" HotspotY="90" Duration="1.000" StartColor="ffffffff" EndColor="ffffffff"/>
+    </Sprite>
+    <Sprite Name="110_Mordresh" Cycle="1">
+        <Frame Texture="Cards\Images\Cards.png" x0="1820" x1="1820" x2="1960" x3="1960" x4="1960" x5="1960" y0="1080" y1="1080" y2="1260" y3="1260" y4="1260" y5="1260" Stretchy="1" HotspotX="70" HotspotY="90" Duration="1.000" StartColor="ffffffff" EndColor="ffffffff"/>
+    </Sprite>
+    <Sprite Name="111_ExileWarbot" Cycle="1">
+        <Frame Texture="Cards\Images\Cards.png" x0="1960" x1="1960" x2="2100" x3="2100" x4="2100" x5="2100" y0="1080" y1="1080" y2="1260" y3="1260" y4="1260" y5="1260" Stretchy="1" HotspotX="70" HotspotY="90" Duration="1.000" StartColor="ffffffff" EndColor="ffffffff"/>
+    </Sprite>
+    <Sprite Name="112_Drusera" Cycle="1">
+        <Frame Texture="Cards\Images\Cards.png" x0="2100" x1="2100" x2="2240" x3="2240" x4="2240" x5="2240" y0="1080" y1="1080" y2="1260" y3="1260" y4="1260" y5="1260" Stretchy="1" HotspotX="70" HotspotY="90" Duration="1.000" StartColor="ffffffff" EndColor="ffffffff"/>
+    </Sprite>
+    <Sprite Name="113_MarshalYatish" Cycle="1">
+        <Frame Texture="Cards\Images\Cards.png" x0="0" x1="0" x2="140" x3="140" x4="140" x5="140" y0="1260" y1="1260" y2="1440" y3="1440" y4="1440" y5="1440" Stretchy="1" HotspotX="70" HotspotY="90" Duration="1.000" StartColor="ffffffff" EndColor="ffffffff"/>
+    </Sprite>
+    <Sprite Name="114_Megadroid" Cycle="1">
+        <Frame Texture="Cards\Images\Cards.png" x0="140" x1="140" x2="280" x3="280" x4="280" x5="280" y0="1260" y1="1260" y2="1440" y3="1440" y4="1440" y5="1440" Stretchy="1" HotspotX="70" HotspotY="90" Duration="1.000" StartColor="ffffffff" EndColor="ffffffff"/>
+    </Sprite>
+    <Sprite Name="115_Nexus" Cycle="1">
+        <Frame Texture="Cards\Images\Cards.png" x0="280" x1="280" x2="420" x3="420" x4="420" x5="420" y0="1260" y1="1260" y2="1440" y3="1440" y4="1440" y5="1440" Stretchy="1" HotspotX="70" HotspotY="90" Duration="1.000" StartColor="ffffffff" EndColor="ffffffff"/>
+    </Sprite>
+    <Sprite Name="116_Protostar" Cycle="1">
+        <Frame Texture="Cards\Images\Cards.png" x0="420" x1="420" x2="560" x3="560" x4="560" x5="560" y0="1260" y1="1260" y2="1440" y3="1440" y4="1440" y5="1440" Stretchy="1" HotspotX="70" HotspotY="90" Duration="1.000" StartColor="ffffffff" EndColor="ffffffff"/>
+    </Sprite>
+    <Sprite Name="117_Caretaker" Cycle="1">
+        <Frame Texture="Cards\Images\Cards.png" x0="560" x1="560" x2="700" x3="700" x4="700" x5="700" y0="1260" y1="1260" y2="1440" y3="1440" y4="1440" y5="1440" Stretchy="1" HotspotX="70" HotspotY="90" Duration="1.000" StartColor="ffffffff" EndColor="ffffffff"/>
+    </Sprite>
+    <Sprite Name="118_Entity" Cycle="1">
+        <Frame Texture="Cards\Images\Cards.png" x0="700" x1="700" x2="840" x3="840" x4="840" x5="840" y0="1260" y1="1260" y2="1440" y3="1440" y4="1440" y5="1440" Stretchy="1" HotspotX="70" HotspotY="90" Duration="1.000" StartColor="ffffffff" EndColor="ffffffff"/>
+    </Sprite>
+    <Sprite Name="119_Tresayne Toria" Cycle="1">
+        <Frame Texture="Cards\Images\Cards.png" x0="840" x1="840" x2="980" x3="980" x4="980" x5="980" y0="1260" y1="1260" y2="1440" y3="1440" y4="1440" y5="1440" Stretchy="1" HotspotX="70" HotspotY="90" Duration="1.000" StartColor="ffffffff" EndColor="ffffffff"/>
+    </Sprite>
+    <Sprite Name="120_Explorer" Cycle="1">
+        <Frame Texture="Cards\Images\Cards.png" x0="980" x1="980" x2="1120" x3="1120" x4="1120" x5="1120" y0="1260" y1="1260" y2="1440" y3="1440" y4="1440" y5="1440" Stretchy="1" HotspotX="70" HotspotY="90" Duration="1.000" StartColor="ffffffff" EndColor="ffffffff"/>
+    </Sprite>
+    <Sprite Name="121_Scientist" Cycle="1">
+        <Frame Texture="Cards\Images\Cards.png" x0="1120" x1="1120" x2="1260" x3="1260" x4="1260" x5="1260" y0="1260" y1="1260" y2="1440" y3="1440" y4="1440" y5="1440" Stretchy="1" HotspotX="70" HotspotY="90" Duration="1.000" StartColor="ffffffff" EndColor="ffffffff"/>
+    </Sprite>
+    <Sprite Name="122_Settler" Cycle="1">
+        <Frame Texture="Cards\Images\Cards.png" x0="1260" x1="1260" x2="1400" x3="1400" x4="1400" x5="1400" y0="1260" y1="1260" y2="1440" y3="1440" y4="1440" y5="1440" Stretchy="1" HotspotX="70" HotspotY="90" Duration="1.000" StartColor="ffffffff" EndColor="ffffffff"/>
+    </Sprite>
+    <Sprite Name="123_Soldier" Cycle="1">
+        <Frame Texture="Cards\Images\Cards.png" x0="1400" x1="1400" x2="1540" x3="1540" x4="1540" x5="1540" y0="1260" y1="1260" y2="1440" y3="1440" y4="1440" y5="1440" Stretchy="1" HotspotX="70" HotspotY="90" Duration="1.000" StartColor="ffffffff" EndColor="ffffffff"/>
+    </Sprite>
+    <Sprite Name="124_GeneticArchives" Cycle="1">
+        <Frame Texture="Cards\Images\Cards.png" x0="1540" x1="1540" x2="1680" x3="1680" x4="1680" x5="1680" y0="1260" y1="1260" y2="1440" y3="1440" y4="1440" y5="1440" Stretchy="1" HotspotX="70" HotspotY="90" Duration="1.000" StartColor="ffffffff" EndColor="ffffffff"/>
+    </Sprite>
+    <Sprite Name="125_Datascape" Cycle="1">
+        <Frame Texture="Cards\Images\Cards.png" x0="1680" x1="1680" x2="1820" x3="1820" x4="1820" x5="1820" y0="1260" y1="1260" y2="1440" y3="1440" y4="1440" y5="1440" Stretchy="1" HotspotX="70" HotspotY="90" Duration="1.000" StartColor="ffffffff" EndColor="ffffffff"/>
+    </Sprite>
+    <Sprite Name="126_OutpostM13" Cycle="1">
+        <Frame Texture="Cards\Images\Cards.png" x0="1820" x1="1820" x2="1960" x3="1960" x4="1960" x5="1960" y0="1260" y1="1260" y2="1440" y3="1440" y4="1440" y5="1440" Stretchy="1" HotspotX="70" HotspotY="90" Duration="1.000" StartColor="ffffffff" EndColor="ffffffff"/>
+    </Sprite>
+    <Sprite Name="127_SalvageRights" Cycle="1">
+        <Frame Texture="Cards\Images\Cards.png" x0="1960" x1="1960" x2="2100" x3="2100" x4="2100" x5="2100" y0="1260" y1="1260" y2="1440" y3="1440" y4="1440" y5="1440" Stretchy="1" HotspotX="70" HotspotY="90" Duration="1.000" StartColor="ffffffff" EndColor="ffffffff"/>
+    </Sprite>
+    <Sprite Name="128_RageLogic" Cycle="1">
+        <Frame Texture="Cards\Images\Cards.png" x0="2100" x1="2100" x2="2240" x3="2240" x4="2240" x5="2240" y0="1260" y1="1260" y2="1440" y3="1440" y4="1440" y5="1440" Stretchy="1" HotspotX="70" HotspotY="90" Duration="1.000" StartColor="ffffffff" EndColor="ffffffff"/>
+    </Sprite>
+    <Sprite Name="129_SpaceMadness" Cycle="1">
+        <Frame Texture="Cards\Images\Cards.png" x0="0" x1="0" x2="140" x3="140" x4="140" x5="140" y0="1440" y1="1440" y2="1620" y3="1620" y4="1620" y5="1620" Stretchy="1" HotspotX="70" HotspotY="90" Duration="1.000" StartColor="ffffffff" EndColor="ffffffff"/>
+    </Sprite>
+    <Sprite Name="130_VoidHunter" Cycle="1">
+        <Frame Texture="Cards\Images\Cards.png" x0="140" x1="140" x2="280" x3="280" x4="280" x5="280" y0="1440" y1="1440" y2="1620" y3="1620" y4="1620" y5="1620" Stretchy="1" HotspotX="70" HotspotY="90" Duration="1.000" StartColor="ffffffff" EndColor="ffffffff"/>
+    </Sprite>
+    <Sprite Name="131_TheGauntlet" Cycle="1">
+        <Frame Texture="Cards\Images\Cards.png" x0="280" x1="280" x2="420" x3="420" x4="420" x5="420" y0="1440" y1="1440" y2="1620" y3="1620" y4="1620" y5="1620" Stretchy="1" HotspotX="70" HotspotY="90" Duration="1.000" StartColor="ffffffff" EndColor="ffffffff"/>
+    </Sprite>
+    <Sprite Name="132_GamblersRuin" Cycle="1">
+        <Frame Texture="Cards\Images\Cards.png" x0="420" x1="420" x2="560" x3="560" x4="560" x5="560" y0="1440" y1="1440" y2="1620" y3="1620" y4="1620" y5="1620" Stretchy="1" HotspotX="70" HotspotY="90" Duration="1.000" StartColor="ffffffff" EndColor="ffffffff"/>
+    </Sprite>
+    <Sprite Name="133_Destiny" Cycle="1">
+        <Frame Texture="Cards\Images\Cards.png" x0="560" x1="560" x2="700" x3="700" x4="700" x5="700" y0="1440" y1="1440" y2="1620" y3="1620" y4="1620" y5="1620" Stretchy="1" HotspotX="70" HotspotY="90" Duration="1.000" StartColor="ffffffff" EndColor="ffffffff"/>
+    </Sprite>
+    <Sprite Name="134_Piglet" Cycle="1">
+        <Frame Texture="Cards\Images\Cards.png" x0="700" x1="700" x2="840" x3="840" x4="840" x5="840" y0="1440" y1="1440" y2="1620" y3="1620" y4="1620" y5="1620" Stretchy="1" HotspotX="70" HotspotY="90" Duration="1.000" StartColor="ffffffff" EndColor="ffffffff"/>
+    </Sprite>
+    <Sprite Name="135_Taxi" Cycle="1">
+        <Frame Texture="Cards\Images\Cards.png" x0="840" x1="840" x2="980" x3="980" x4="980" x5="980" y0="1440" y1="1440" y2="1620" y3="1620" y4="1620" y5="1620" Stretchy="1" HotspotX="70" HotspotY="90" Duration="1.000" StartColor="ffffffff" EndColor="ffffffff"/>
+    </Sprite>
+    <Sprite Name="136_Unknown1" Cycle="1">
+        <Frame Texture="Cards\Images\Cards.png" x0="980" x1="980" x2="1120" x3="1120" x4="1120" x5="1120" y0="1440" y1="1440" y2="1620" y3="1620" y4="1620" y5="1620" Stretchy="1" HotspotX="70" HotspotY="90" Duration="1.000" StartColor="ffffffff" EndColor="ffffffff"/>
+    </Sprite>
+    <Sprite Name="137_Unknown2" Cycle="1">
+        <Frame Texture="Cards\Images\Cards.png" x0="1120" x1="1120" x2="1260" x3="1260" x4="1260" x5="1260" y0="1440" y1="1440" y2="1620" y3="1620" y4="1620" y5="1620" Stretchy="1" HotspotX="70" HotspotY="90" Duration="1.000" StartColor="ffffffff" EndColor="ffffffff"/>
+    </Sprite>
+    <Sprite Name="138_DefensiveProtocolUnit" Cycle="1">
+        <Frame Texture="Cards\Images\Cards.png" x0="1260" x1="1260" x2="1400" x3="1400" x4="1400" x5="1400" y0="1440" y1="1440" y2="1620" y3="1620" y4="1620" y5="1620" Stretchy="1" HotspotX="70" HotspotY="90" Duration="1.000" StartColor="ffffffff" EndColor="ffffffff"/>
+    </Sprite>
+    <Sprite Name="139_DoomthornAncient" Cycle="1">
+        <Frame Texture="Cards\Images\Cards.png" x0="1400" x1="1400" x2="1540" x3="1540" x4="1540" x5="1540" y0="1440" y1="1440" y2="1620" y3="1620" y4="1620" y5="1620" Stretchy="1" HotspotX="70" HotspotY="90" Duration="1.000" StartColor="ffffffff" EndColor="ffffffff"/>
+    </Sprite>
+    <Sprite Name="140_GrendelusGuardian" Cycle="1">
+        <Frame Texture="Cards\Images\Cards.png" x0="1540" x1="1540" x2="1680" x3="1680" x4="1680" x5="1680" y0="1440" y1="1440" y2="1620" y3="1620" y4="1620" y5="1620" Stretchy="1" HotspotX="70" HotspotY="90" Duration="1.000" StartColor="ffffffff" EndColor="ffffffff"/>
+    </Sprite>
+    <Sprite Name="141_HellroseBowl" Cycle="1">
+        <Frame Texture="Cards\Images\Cards.png" x0="1680" x1="1680" x2="1820" x3="1820" x4="1820" x5="1820" y0="1440" y1="1440" y2="1620" y3="1620" y4="1620" y5="1620" Stretchy="1" HotspotX="70" HotspotY="90" Duration="1.000" StartColor="ffffffff" EndColor="ffffffff"/>
+    </Sprite>
+    <Sprite Name="142_HoardingStemdragon" Cycle="1">
+        <Frame Texture="Cards\Images\Cards.png" x0="1820" x1="1820" x2="1960" x3="1960" x4="1960" x5="1960" y0="1440" y1="1440" y2="1620" y3="1620" y4="1620" y5="1620" Stretchy="1" HotspotX="70" HotspotY="90" Duration="1.000" StartColor="ffffffff" EndColor="ffffffff"/>
+    </Sprite>
+    <Sprite Name="143_KingHoneygrave" Cycle="1">
+        <Frame Texture="Cards\Images\Cards.png" x0="1960" x1="1960" x2="2100" x3="2100" x4="2100" x5="2100" y0="1440" y1="1440" y2="1620" y3="1620" y4="1620" y5="1620" Stretchy="1" HotspotX="70" HotspotY="90" Duration="1.000" StartColor="ffffffff" EndColor="ffffffff"/>
+    </Sprite>
+    <Sprite Name="144_Kraggar" Cycle="1">
+        <Frame Texture="Cards\Images\Cards.png" x0="2100" x1="2100" x2="2240" x3="2240" x4="2240" x5="2240" y0="1440" y1="1440" y2="1620" y3="1620" y4="1620" y5="1620" Stretchy="1" HotspotX="70" HotspotY="90" Duration="1.000" StartColor="ffffffff" EndColor="ffffffff"/>
+    </Sprite>
+    <Sprite Name="145_MetalMaw" Cycle="1">
+        <Frame Texture="Cards\Images\Cards.png" x0="0" x1="0" x2="140" x3="140" x4="140" x5="140" y0="1620" y1="1620" y2="1800" y3="1800" y4="1800" y5="1800" Stretchy="1" HotspotX="70" HotspotY="90" Duration="1.000" StartColor="ffffffff" EndColor="ffffffff"/>
+    </Sprite>
+    <Sprite Name="146_MetalMawPrime" Cycle="1">
+        <Frame Texture="Cards\Images\Cards.png" x0="140" x1="140" x2="280" x3="280" x4="280" x5="280" y0="1620" y1="1620" y2="1800" y3="1800" y4="1800" y5="1800" Stretchy="1" HotspotX="70" HotspotY="90" Duration="1.000" StartColor="ffffffff" EndColor="ffffffff"/>
+    </Sprite>
+    <Sprite Name="147_Thayd" Cycle="1">
+        <Frame Texture="Cards\Images\Cards.png" x0="280" x1="280" x2="420" x3="420" x4="420" x5="420" y0="1620" y1="1620" y2="1800" y3="1800" y4="1800" y5="1800" Stretchy="1" HotspotX="70" HotspotY="90" Duration="1.000" StartColor="ffffffff" EndColor="ffffffff"/>
+    </Sprite>
+    <Sprite Name="148_Ilium" Cycle="1">
+        <Frame Texture="Cards\Images\Cards.png" x0="420" x1="420" x2="560" x3="560" x4="560" x5="560" y0="1620" y1="1620" y2="1800" y3="1800" y4="1800" y5="1800" Stretchy="1" HotspotX="70" HotspotY="90" Duration="1.000" StartColor="ffffffff" EndColor="ffffffff"/>
+    </Sprite>
+    <Sprite Name="149_Algoroc" Cycle="1">
+        <Frame Texture="Cards\Images\Cards.png" x0="560" x1="560" x2="700" x3="700" x4="700" x5="700" y0="1620" y1="1620" y2="1800" y3="1800" y4="1800" y5="1800" Stretchy="1" HotspotX="70" HotspotY="90" Duration="1.000" StartColor="ffffffff" EndColor="ffffffff"/>
+    </Sprite>
+    <Sprite Name="150_Celestion" Cycle="1">
+        <Frame Texture="Cards\Images\Cards.png" x0="700" x1="700" x2="840" x3="840" x4="840" x5="840" y0="1620" y1="1620" y2="1800" y3="1800" y4="1800" y5="1800" Stretchy="1" HotspotX="70" HotspotY="90" Duration="1.000" StartColor="ffffffff" EndColor="ffffffff"/>
+    </Sprite>
+    <Sprite Name="151_Deradune" Cycle="1">
+        <Frame Texture="Cards\Images\Cards.png" x0="840" x1="840" x2="980" x3="980" x4="980" x5="980" y0="1620" y1="1620" y2="1800" y3="1800" y4="1800" y5="1800" Stretchy="1" HotspotX="70" HotspotY="90" Duration="1.000" StartColor="ffffffff" EndColor="ffffffff"/>
+    </Sprite>
+    <Sprite Name="152_Ellevar" Cycle="1">
+        <Frame Texture="Cards\Images\Cards.png" x0="980" x1="980" x2="1120" x3="1120" x4="1120" x5="1120" y0="1620" y1="1620" y2="1800" y3="1800" y4="1800" y5="1800" Stretchy="1" HotspotX="70" HotspotY="90" Duration="1.000" StartColor="ffffffff" EndColor="ffffffff"/>
+    </Sprite>
+    <Sprite Name="153_Galeras" Cycle="1">
+        <Frame Texture="Cards\Images\Cards.png" x0="1120" x1="1120" x2="1260" x3="1260" x4="1260" x5="1260" y0="1620" y1="1620" y2="1800" y3="1800" y4="1800" y5="1800" Stretchy="1" HotspotX="70" HotspotY="90" Duration="1.000" StartColor="ffffffff" EndColor="ffffffff"/>
+    </Sprite>
+    <Sprite Name="154_Auroria" Cycle="1">
+        <Frame Texture="Cards\Images\Cards.png" x0="1260" x1="1260" x2="1400" x3="1400" x4="1400" x5="1400" y0="1620" y1="1620" y2="1800" y3="1800" y4="1800" y5="1800" Stretchy="1" HotspotX="70" HotspotY="90" Duration="1.000" StartColor="ffffffff" EndColor="ffffffff"/>
+    </Sprite>
+    <Sprite Name="155_Whitevale" Cycle="1">
+        <Frame Texture="Cards\Images\Cards.png" x0="1400" x1="1400" x2="1540" x3="1540" x4="1540" x5="1540" y0="1620" y1="1620" y2="1800" y3="1800" y4="1800" y5="1800" Stretchy="1" HotspotX="70" HotspotY="90" Duration="1.000" StartColor="ffffffff" EndColor="ffffffff"/>
+    </Sprite>
+    <Sprite Name="156_Farside" Cycle="1">
+        <Frame Texture="Cards\Images\Cards.png" x0="1540" x1="1540" x2="1680" x3="1680" x4="1680" x5="1680" y0="1620" y1="1620" y2="1800" y3="1800" y4="1800" y5="1800" Stretchy="1" HotspotX="70" HotspotY="90" Duration="1.000" StartColor="ffffffff" EndColor="ffffffff"/>
+    </Sprite>
+    <Sprite Name="157_Wilderrun" Cycle="1">
+        <Frame Texture="Cards\Images\Cards.png" x0="1680" x1="1680" x2="1820" x3="1820" x4="1820" x5="1820" y0="1620" y1="1620" y2="1800" y3="1800" y4="1800" y5="1800" Stretchy="1" HotspotX="70" HotspotY="90" Duration="1.000" StartColor="ffffffff" EndColor="ffffffff"/>
+    </Sprite>
+    <Sprite Name="158_Malgrave" Cycle="1">
+        <Frame Texture="Cards\Images\Cards.png" x0="1820" x1="1820" x2="1960" x3="1960" x4="1960" x5="1960" y0="1620" y1="1620" y2="1800" y3="1800" y4="1800" y5="1800" Stretchy="1" HotspotX="70" HotspotY="90" Duration="1.000" StartColor="ffffffff" EndColor="ffffffff"/>
+    </Sprite>
+    <Sprite Name="159_Grimvault" Cycle="1">
+        <Frame Texture="Cards\Images\Cards.png" x0="1960" x1="1960" x2="2100" x3="2100" x4="2100" x5="2100" y0="1620" y1="1620" y2="1800" y3="1800" y4="1800" y5="1800" Stretchy="1" HotspotX="70" HotspotY="90" Duration="1.000" StartColor="ffffffff" EndColor="ffffffff"/>
+    </Sprite>
+    <Sprite Name="160_CrimsonBadlands" Cycle="1">
+        <Frame Texture="Cards\Images\Cards.png" x0="2100" x1="2100" x2="2240" x3="2240" x4="2240" x5="2240" y0="1620" y1="1620" y2="1800" y3="1800" y4="1800" y5="1800" Stretchy="1" HotspotX="70" HotspotY="90" Duration="1.000" StartColor="ffffffff" EndColor="ffffffff"/>
+    </Sprite>
+    <Sprite Name="161_NorthernWastes" Cycle="1">
+        <Frame Texture="Cards\Images\Cards.png" x0="0" x1="0" x2="140" x3="140" x4="140" x5="140" y0="1800" y1="1800" y2="1980" y3="1980" y4="1980" y5="1980" Stretchy="1" HotspotX="70" HotspotY="90" Duration="1.000" StartColor="ffffffff" EndColor="ffffffff"/>
+    </Sprite>
+    <Sprite Name="162_Blighthaven" Cycle="1">
+        <Frame Texture="Cards\Images\Cards.png" x0="140" x1="140" x2="280" x3="280" x4="280" x5="280" y0="1800" y1="1800" y2="1980" y3="1980" y4="1980" y5="1980" Stretchy="1" HotspotX="70" HotspotY="90" Duration="1.000" StartColor="ffffffff" EndColor="ffffffff"/>
+    </Sprite>
+</Sprites>
