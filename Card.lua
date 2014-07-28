@@ -52,10 +52,10 @@ function Card.new(nCardId, wndParent, bShowNumbers, bVisible, strGlowColour, str
 	self.strFlair = ""
 	self.nQualityID = tCardData.nQualityID
 	self.bShowNumbers = bShowNumbers
-	self.tmrFlip = ApolloTimer.Create(0.01, true, "OnFlipCardAnimateTimer", self)
+	self.tmrFlip = nil
 	
 	if wndParent then
-		local wndCard = Apollo.LoadForm("Cards.xml", "CardWindow", wndParent, luaCardOwner)
+		local wndCard = Apollo.LoadForm(CardsData.xmlDoc, "CardWindow", wndParent, luaCardOwner)
 		if not wndCard then
 			Print("Could not create card.")
 		end
@@ -101,6 +101,17 @@ function Card.new(nCardId, wndParent, bShowNumbers, bVisible, strGlowColour, str
 
 	return self
 end
+
+function Card:Destroy()
+	if self.wndCard then
+		self.wndCard:Destroy()
+		self.wndCard = nil
+	end
+	if self.tmrFlip then
+		self.tmrFlip:Stop()
+		self.tmrFlip = nil
+	end
+end
  
 -----------------------------------------------------------------------------------------------
 -- Cards Functions
@@ -135,6 +146,8 @@ function Card:SetOwner(nSide)
 	self.nLootCardAnimationValue = 0
 	self.fLastOSClock = os.clock()
 	self.bAnimating = true
+
+	self.tmrFlip = ApolloTimer.Create(0.01, true, "OnFlipCardAnimateTimer", self)
 	self.tmrFlip:Start()
 end
 
@@ -184,6 +197,7 @@ function Card:OnFlipCardAnimateTimer()
 		self.bAnimating = false
 		self.nLootCardAnimationValue = 0
 		self.tmrFlip:Stop()
+		self.tmrFlip = nil
 	end
 end
 

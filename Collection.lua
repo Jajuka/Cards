@@ -38,13 +38,14 @@ function Collection.new()
 	self.nOpenToCardId = nil
 	
 	--for iIndex, tCard in pairs(karCards) do
-	local wndCardList= self.wndMain:FindChild("CardList")
+	local wndCardList = self.wndMain:FindChild("CardList")
 	wndCardList:DestroyChildren()
 	
 	self.wndMain:FindChild("ShowOwnedOnly"):Enable(false)
 
 	self.nNextCardId = 1
-	self.tmrInit = ApolloTimer.Create(0, true, "OnInitialiseTimer", self)		
+	self.tmrInit = ApolloTimer.Create(0, true, "OnInitialiseTimer", self)
+	self.tmrInit:Stop()
 	self.tmrInit:Start()
 	
 	return self
@@ -54,6 +55,7 @@ function Collection:Initialise( tCollection, nOpenToCardId  )
 	assert(tCollection ~= nil, "Collection class requires a collection parameter to the constructor.")
 	self.tCollection = tCollection
 	self.nOpenToCardId = nOpenToCardId
+	self.tCategorised = {}
 end
 
 function Collection:PopulateCategories()
@@ -77,7 +79,10 @@ function Collection:PopulateCategories()
 end
 
 function Collection:OnInitialiseTimer()
-	for nIndex = 1, 3 do
+	self.wndMain:FindChild("Loading"):FindChild("Progress"):SetText(string.format("Loading cards, %.0f%% complete", self.nNextCardId / #CardsData.karCards * 100))
+	
+	--for nIndex = 1, 3 do
+		Print(self.nNextCardId)
 		-- Create the next card.
 		self.wndMain:FindChild("Loading"):FindChild("Progress"):SetText(string.format("Loading cards, %.0f%% complete", self.nNextCardId / #CardsData.karCards * 100))
 		
@@ -92,10 +97,10 @@ function Collection:OnInitialiseTimer()
 		
 		self.nNextCardId = self.nNextCardId + 1
 
-		if self.nNextCardId > #CardsData.karCards then
-			break
-		end
-	end
+		--if self.nNextCardId > #CardsData.karCards then
+		--	break
+		--end
+	--end
 	if self.nNextCardId > #CardsData.karCards then
 		if self.nOpenToCardId then
 			self.strCategory = CardsData.karCards[self.nOpenToCardId].strCategory
@@ -105,6 +110,7 @@ function Collection:OnInitialiseTimer()
 		self:PopulateCategories()
 		self.nNextCardId = 0
 		self.tmrInit:Stop()
+		self.tmrInit = nil
 		self:CalculateOwned()
 		self:PopulateCategory()
 		self.nOpenToCardId = nil
@@ -210,7 +216,7 @@ function Collection:AddCategory(strCategory, fPercentCollected, bSelected)
 		end
 	else
 		local wndCategoryList = self.wndMain:FindChild("CategoryList")
-		local wndItem = Apollo.LoadForm("Cards.xml", "CollectionCategoryListItem", wndCategoryList, self)
+		local wndItem = Apollo.LoadForm(CardsData.xmlDoc, "CollectionCategoryListItem", wndCategoryList, self)
 		self.arwndCategories[strCategory] = wndItem
 		wndItem:FindChild("Text"):SetText(strCategory)
 		wndItem:FindChild("Progress"):SetText(string.format("%.0f%%", math.floor(fPercentCollected * 100)))
@@ -226,7 +232,8 @@ end
 
 function Collection:CreateCard(nCardId, bDeferLayout)
 	local wndCardList = self.wndMain:FindChild("CardList")
-	local wndItem = Apollo.LoadForm("Cards.xml", "CollectionCardListItem", wndCardList, self)
+	--local wndItem = Apollo.LoadForm("Cards.xml", "CollectionCardListItem", wndCardList, self)
+	local wndItem = Apollo.LoadForm(CardsData.xmlDoc, "CollectionCardListItem", wndCardList, self)
 	wndItem:Show(false, true)
 	
 	local wndCardContainer = wndItem:FindChild("CardContainer")
@@ -253,6 +260,21 @@ end
 ---------------------------------------------------------------------------------------------------
 
 function Collection:OnCollectionCloseButton( wndHandler, wndControl, eMouseButton )
+	-- Attempts (as yet unsuccessful) at cleaning up to stop the slow loading after a few times.
+	for nIndex, tCategory in pairs(self.tCategorised) do
+		for nItemIndex, tItem in pairs(tCategory.tCards) do
+			tItem.oCard:Destroy()
+			tItem.oCard = nil
+			tItem.wndItem:Destroy()
+			tItem.wndItem = nil
+			tItem = nil
+		end
+		tCategory = nil
+	end
+	self.tCategorised = nil
+	
+	local wndCardList = self.wndMain:FindChild("CardList")
+	wndCardList:DestroyChildren()
 	self.wndMain:Destroy()
 	self.wndMain = nil
 end
