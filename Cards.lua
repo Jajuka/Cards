@@ -60,6 +60,8 @@ end
 -----------------------------------------------------------------------------------------------
 function Cards:OnDocLoaded()
 	if self.xmlDoc ~= nil and self.xmlDoc:IsLoaded() then
+		CardsData.xmlDoc = self.xmlDoc
+		
 	    self.wndMenu = Apollo.LoadForm(self.xmlDoc, "MenuWindow", nil, self)
 		if self.wndMenu == nil then
 			Apollo.AddAddonErrorText(self, "Could not load the menu window for some reason.")

@@ -81,8 +81,7 @@ end
 function Collection:OnInitialiseTimer()
 	self.wndMain:FindChild("Loading"):FindChild("Progress"):SetText(string.format("Loading cards, %.0f%% complete", self.nNextCardId / #CardsData.karCards * 100))
 	
-	--for nIndex = 1, 3 do
-		Print(self.nNextCardId)
+	for nIndex = 1, 3 do
 		-- Create the next card.
 		self.wndMain:FindChild("Loading"):FindChild("Progress"):SetText(string.format("Loading cards, %.0f%% complete", self.nNextCardId / #CardsData.karCards * 100))
 		
@@ -97,10 +96,10 @@ function Collection:OnInitialiseTimer()
 		
 		self.nNextCardId = self.nNextCardId + 1
 
-		--if self.nNextCardId > #CardsData.karCards then
-		--	break
-		--end
-	--end
+		if self.nNextCardId > #CardsData.karCards then
+			break
+		end
+	end
 	if self.nNextCardId > #CardsData.karCards then
 		if self.nOpenToCardId then
 			self.strCategory = CardsData.karCards[self.nOpenToCardId].strCategory

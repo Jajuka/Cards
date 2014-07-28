@@ -60,7 +60,7 @@ function CardGame.new( a, oPlayer1, oPlayer2 )
 		return
 	end
 	
-	self.wndMain = Apollo.LoadForm("Cards.xml", "GameWindow", nil, self)
+	self.wndMain = Apollo.LoadForm(CardsData.xmlDoc, "GameWindow", nil, self)
 	if not self.wndMain then
 		Print("Could not create game window.")
 		return
@@ -68,7 +68,7 @@ function CardGame.new( a, oPlayer1, oPlayer2 )
 
 	self.wndMain:Show(false, true)
 	
-	self.wndOutcome = Apollo.LoadForm("Cards.xml", "OutcomeWindow", self.wndMain, self)
+	self.wndOutcome = Apollo.LoadForm(CardsData.xmlDoc, "OutcomeWindow", self.wndMain, self)
 	if not self.wndOutcome then
 		Print("Could not create outcome window.")
 		return

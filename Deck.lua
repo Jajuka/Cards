@@ -26,7 +26,7 @@ setmetatable(Deck, {
 function Deck.new()
 	local self = setmetatable({}, Deck)
 
-	self.wndMain = Apollo.LoadForm("Cards.xml", "DeckWindow", nil, self)
+	self.wndMain = Apollo.LoadForm(CardsData.xmlDoc, "DeckWindow", nil, self)
 	assert(self.wndMain, "Failed to create deck window.")
 	
 	self.wndMain:Show(false, true)
@@ -154,7 +154,7 @@ function Deck:AddCategory(strCategory, bSelected)
 		end
 	else
 		local wndCategoryList = self.wndMain:FindChild("CategoryList")
-		local wndItem = Apollo.LoadForm("Cards.xml", "CollectionCategoryListItem", wndCategoryList, self)
+		local wndItem = Apollo.LoadForm(CardsData.xmlDoc, "CollectionCategoryListItem", wndCategoryList, self)
 		self.arwndCategories[strCategory] = wndItem
 		wndItem:FindChild("Text"):SetText(strCategory)
 		wndItem:FindChild("Progress"):SetText("")
@@ -168,7 +168,8 @@ function Deck:AddCategory(strCategory, bSelected)
 	end
 end
 
-function Deck:SetCategory(wndItem)	
+function Deck:SetCategory(wndItem)
+	Print("SetCategory")
 	self.wndSelectedCategory = wndItem
 	self.strCategory = wndItem:GetData()
 	if self.nNextCardId == 0 then
@@ -177,6 +178,7 @@ function Deck:SetCategory(wndItem)
 end
 
 function Deck:PopulateCategory(bNoRearrange)
+	Print("PopulateCategory " .. self.strCategory)
 	local wndCardList = self.wndMain:FindChild("CardList")
 	
 	local bShowOwnedOnly = true
@@ -215,7 +217,9 @@ function Deck:PopulateCategory(bNoRearrange)
 				--if bShowOwnedOnly then
 					--tCard.wndItem:Show(bOwned, true)
 				--else
+				if self.tCollection[tCard.oCard.nCardId] and self.tCollection[tCard.oCard.nCardId] > 0 then
 					tCard.wndItem:Show(true, true)
+				end
 				--end
 			else
 				tCard.wndItem:Show(false, true)
@@ -230,7 +234,7 @@ end
 
 function Deck:CreateCard(nCardId, bDeferLayout)
 	local wndCardList = self.wndMain:FindChild("CardList")
-	local wndItem = Apollo.LoadForm("Cards.xml", "CollectionCardListItem", wndCardList, self)
+	local wndItem = Apollo.LoadForm(CardsData.xmlDoc, "CollectionCardListItem", wndCardList, self)
 	wndItem:Show(false, true)
 
 	local wndCardContainer = wndItem:FindChild("CardContainer")
@@ -362,7 +366,7 @@ function Deck:OnDeckCloseButton( wndHandler, wndControl, eMouseButton )
 	self.wndMain = nil
 end
 
-function Deck:OnDeckCategoryListItemCheck( wndHandler, wndControl, eMouseButton )
+function Deck:OnCollectionCategoryListItemCheck( wndHandler, wndControl, eMouseButton )
 	self:SetCategory(wndControl)
 end
 
