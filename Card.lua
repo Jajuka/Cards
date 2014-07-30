@@ -142,16 +142,21 @@ function Card:SetOwner(nSide)
 	self.wndCard:FindChild("NumberTop"):Show(false, false)
 	self.wndCard:FindChild("NumberBottom"):Show(false, false)
 
-	self.nOffsetLeft, self.nOffsetTop, _, _ = self.wndCard:GetAnchorOffsets()
-	self.nLootCardAnimationValue = 0
-	self.fLastOSClock = os.clock()
-	self.bAnimating = true
+	if not self.bAnimating then
+		self.nOffsetLeft, self.nOffsetTop, _, _ = self.wndCard:GetAnchorOffsets()
+		self.nLootCardAnimationValue = 0
+		self.fLastOSClock = os.clock()
+		self.bAnimating = true
 
-	self.tmrFlip = ApolloTimer.Create(0.01, true, "OnFlipCardAnimateTimer", self)
-	self.tmrFlip:Start()
+		self.tmrFlip = ApolloTimer.Create(0.01, true, "OnFlipCardAnimateTimer", self)
+		self.tmrFlip:Start()
+	end
 end
 
 function Card:OnFlipCardAnimateTimer()
+	if not self.bAnimating then return end
+	
+	if self.nLootCardAnimationValue >= 100 then self.nLootCardAnimationValue = 100 end
 	local nClippedValue = math.mod(self.nLootCardAnimationValue, 100)
 	local fLootCardAnimationSine = math.cos( nClippedValue / 100 * 6.28318530718)
 
@@ -182,23 +187,26 @@ function Card:OnFlipCardAnimateTimer()
 		self.wndCard:Show(true)
 	end
 	
-	if self.nLootCardAnimationValue > 75 then
+	if self.nLootCardAnimationValue >= 75 then
 		self.wndCard:FindChild("NumberLeft"):Show(true, false)
 		self.wndCard:FindChild("NumberRight"):Show(true, false)
 		self.wndCard:FindChild("NumberTop"):Show(true, false)
 		self.wndCard:FindChild("NumberBottom"):Show(true, false)
 	end
 	
-	local fOSClock = os.clock()
-	self.nLootCardAnimationValue = self.nLootCardAnimationValue + ((fOSClock - self.fLastOSClock) * 125)
-	self.fLastOSClock = fOSClock
-			
-	if self.nLootCardAnimationValue > 100 then
-		self.bAnimating = false
-		self.nLootCardAnimationValue = 0
+	if self.nLootCardAnimationValue >= 100 then
 		self.tmrFlip:Stop()
 		self.tmrFlip = nil
+		self.bAnimating = false
+		self.nLootCardAnimationValue = 0
+		self.wndCard:SetAnchorOffsets(self.nOffsetLeft, self.nOffsetTop, self.nOffsetLeft + 140, self.nOffsetTop + 180)
 	end
+
+	local fOSClock = os.clock()
+	self.nLootCardAnimationValue = self.nLootCardAnimationValue + ((fOSClock - self.fLastOSClock) * 125)
+	if self.nLootCardAnimationValue > 100 then self.nLootCardAnimationValue = 100 end
+	self.fLastOSClock = fOSClock
+			
 end
 
 -----------------------------------------------------------------------------------------------
