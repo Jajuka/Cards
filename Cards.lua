@@ -11,6 +11,7 @@ require "Window"
 local Cards = {} 
 local CardsData = _G["Saikou:CardsLibs"]["CardsData"]
 local Card = _G["Saikou:CardsLibs"]["Card"]
+local Statistics = _G["Saikou:CardsLibs"]["Statistics"]
 local CardGamePlayer = _G["Saikou:CardsLibs"]["CardGamePlayer"]
 local CardGame = _G["Saikou:CardsLibs"]["CardGame"]
 local Collection = _G["Saikou:CardsLibs"]["Collection"]
@@ -64,20 +65,25 @@ function Cards:OnDocLoaded()
 		
 	    self.wndMenu = Apollo.LoadForm(self.xmlDoc, "MenuWindow", nil, self)
 		if self.wndMenu == nil then
-			Apollo.AddAddonErrorText(self, "Could not load the menu window for some reason.")
+			Apollo.AddAddonErrorText(self, "Could not load the menu window.")
 			return
-		end
-		
+		end		
 	    self.wndMenu:Show(false, true)
 				
 	    self.wndOpponent = Apollo.LoadForm(self.xmlDoc, "OpponentWindow", nil, self)
 		if self.wndOpponent == nil then
-			Apollo.AddAddonErrorText(self, "Could not load the opponent window for some reason.")
+			Apollo.AddAddonErrorText(self, "Could not load the opponent window.")
 			return
-		end
-		
+		end		
 	    self.wndOpponent:Show(false, true)
 				
+		self.wndStatistics = Apollo.LoadForm(CardsData.xmlDoc, "StatisticsWindow", nil, self)
+		if not self.wndStatistics then
+			Print("Could not create statistics window.")
+			return
+		end	
+		self.wndStatistics:Show(false, true)
+	
 		-- Register handlers for events, slash commands and timer, etc.
 		Apollo.RegisterSlashCommand("cards", "OnSlashCommand", self)
 		--Apollo.RegisterSlashCommand("lootcard", "OnTestLootSlashCommand", self)
@@ -94,7 +100,9 @@ function Cards:OnDocLoaded()
         self.tmrLootCardAnimate = ApolloTimer.Create(0.01, true, "OnLootCardAnimateTimer", self)		
 
 		-- Perform other initialisation.
-		CardsData.Categorise()
+		self.tStatistics = self.tStatistics or {}	-- Ensure this isn't null as the reference must be passed to the statistics singleton.
+		Statistics.Initialise(self.tStatistics, self.tCollection, self)
+		CardsData.Initialise()
 		self:InitLootFrame()
 		
 	end
@@ -134,6 +142,7 @@ function Cards:LootCard(nCardId)
 	if self:AddCardToCollection(nCardId) then
 		table.insert(self.tLootQueue, nCardId)
 		self.tmrLootCardAnimate:Start()
+		Statistics.AddCardFoundFromKill()	
 	end
 end
 
@@ -144,7 +153,7 @@ function Cards:OnCombatLogDamage(tEventArgs)
 		local unitTarget = tEventArgs.unitTarget
 		-- Both unitCaster and unitTarget can be null rarely (fall damage deaths maybe?) so play safe.
 		if unitCaster and unitCaster:IsThePlayer() and unitTarget and not unitTarget:IsThePlayer() then
-			Print("You killed " .. unitTarget:GetName())
+			--Print("You killed " .. unitTarget:GetName())
 			local nFactionID  = unitTarget:GetFaction()
 			if math.random(1, 100) == 63 then
 				local tCard = self:ChooseRandomQualityCard()
@@ -160,19 +169,19 @@ function Cards:ChooseRandomQualityCard()
 	local nRoll = math.random(1, 1000)
 	local tList = nil
 	if nRoll <= 300 then
-		tList = CardsData.tByQuality[1]
+		tList = CardsData.tCardsByQuality[1]
 	elseif nRoll <= 700 then
-		tList = CardsData.tByQuality[2]
+		tList = CardsData.tCardsByQuality[2]
 	elseif nRoll <= 900 then
-		tList = CardsData.tByQuality[3]
+		tList = CardsData.tCardsByQuality[3]
 	elseif nRoll <= 970 then
-		tList = CardsData.tByQuality[4]
+		tList = CardsData.tCardsByQuality[4]
 	elseif nRoll <= 990 then
-		tList = CardsData.tByQuality[5]
+		tList = CardsData.tCardsByQuality[5]
 	elseif nRoll <= 998 then
-		tList = CardsData.tByQuality[6]
+		tList = CardsData.tCardsByQuality[6]
 	else
-		tList = CardsData.tByQuality[7]
+		tList = CardsData.tCardsByQuality[7]
 	end
 	
 	local tCard = tList[math.random(#tList)]
@@ -187,6 +196,10 @@ function Cards:InitialiseDefaultCollection( bForceRegenerate )
 			self.tCollection = {}
 			self.tCollection.bIsInitialised = true
 			self.tDeck = {}
+			if bForceRegenerate then
+				self.tStatistics = {}
+				Statistics.Initialise(self.tStatistics, self.tCollection)
+			end
 		
 			-- Set up some default cards (5 random critters, 3 creatures, the path the player has, the player's class and the race the character is playing).
 			local kMinimumCritterCard = 72
@@ -282,6 +295,7 @@ function Cards:AddCardToCollection(nCardId)
 		self.oCollection:CalculateOwned()
 		self.oCollection:PopulateCategory(true)
 	end
+	
 	return true
 end
 
@@ -317,6 +331,9 @@ end
 
 function Cards:OnMenuChallengeButton( wndHandler, wndControl, eMouseButton )
 	self.wndMenu:Show(false)
+	-- TODO: Implement hard opponent.
+	self.wndOpponent:FindChild("Hard"):Enable(false)
+	self.wndOpponent:FindChild("Hard"):SetOpacity(0.2)
 	self.wndOpponent:Invoke()
 end
 
@@ -340,8 +357,7 @@ function Cards:OnBattleStart( tArgs )
 	oPlayer1:SetUnit(GameLib.GetPlayerUnit())
 	oPlayer1:SetDeck(self.tDeck)
 	
-	local nOpponentId = math.random(#CardsData.karOpponents)
-	local tOpponent = CardsData.karOpponents[nOpponentId]
+	local tOpponent = CardsData.tOpponentsByDifficulty[self.nOpponentDifficulty][math.random(#CardsData.tOpponentsByDifficulty[self.nOpponentDifficulty])]
 	
 	oPlayer2:SetOpponent(tOpponent)
 	oPlayer2:ChooseDeck(self.tDeck, self.nOpponentDifficulty)
@@ -370,7 +386,16 @@ function Cards:OnMenuCollectionButton( wndHandler, wndControl, eMouseButton )
 	self.oCollection.wndMain:Invoke()
 end
 
----------------------------------------------------------------------------------------------------
+function Cards:OnMenuStatisticsButton( wndHandler, wndControl, eMouseButton )
+	Statistics.Populate(self.wndStatistics)
+	self.wndMenu:Show(false)
+	self.wndStatistics:Show(true)
+end
+
+function Cards:OnMenuTutorialButton( wndHandler, wndControl, eMouseButton )
+end
+
+-----------------------------------------------------------------------------------
 -- Timer Functions
 ---------------------------------------------------------------------------------------------------
 
@@ -459,7 +484,8 @@ function Cards:OnSave( eLevel )
 	return
 	{
 		tCollection = self.tCollection,
-		tDeck = self.tDeck 
+		tDeck = self.tDeck,
+		tStatistics = self.tStatistics 
 	}
 end
 
@@ -470,6 +496,9 @@ function Cards:OnRestore( eLevel, tSavedData )
 	end
 	if tSavedData.tDeck then
 		self.tDeck = tSavedData.tDeck 
+	end
+	if tSavedData.tStatistics then
+		self.tStatistics = tSavedData.tStatistics
 	end
 end
 
@@ -496,18 +525,32 @@ end
 
 function Cards:OnOpponentEasyButtonClick( wndHandler, wndControl, eMouseButton )
 	self.wndOpponent:Show(false)
-	self.nOpponentDifficulty = 0
+	self.nOpponentDifficulty = 1
+	self:BuildDeck()
+end
+
+function Cards:OnOpponentMediumButtonClick( wndHandler, wndControl, eMouseButton )
+	self.wndOpponent:Show(false)
+	self.nOpponentDifficulty = 2
 	self:BuildDeck()
 end
 
 function Cards:OnOpponentHardButtonClick( wndHandler, wndControl, eMouseButton )
 	self.wndOpponent:Show(false)
-	self.nOpponentDifficulty = 1
+	self.nOpponentDifficulty = 3
 	self:BuildDeck()
 end
 
 function Cards:OnOpponentWindowCloseButton( wndHandler, wndControl, eMouseButton )
 	self.wndOpponent:Show(false)
+end
+
+---------------------------------------------------------------------------------------------------
+-- StatisticsWindow Functions
+---------------------------------------------------------------------------------------------------
+
+function Cards:OnStatisticsWindowCloseButton( wndHandler, wndControl, eMouseButton )
+	self.wndStatistics:Show(false)
 end
 
 -----------------------------------------------------------------------------------------------

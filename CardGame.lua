@@ -6,6 +6,7 @@ require "Window"
  
 local CardsData = _G["Saikou:CardsLibs"]["CardsData"]
 local Card = _G["Saikou:CardsLibs"]["Card"]
+local Statistics = _G["Saikou:CardsLibs"]["Statistics"]
 
 -----------------------------------------------------------------------------------------------
 -- CardGame Definition
@@ -104,6 +105,9 @@ function CardGame:ValidatePlayers()
 end
 
 function CardGame:Initialise()
+	Statistics.AddGamePlayed(self.oPlayer2.nDifficulty)
+	Statistics.AddOpponentEncountered(self.oPlayer2.nOpponentId)
+
 	self.nPlayer1TopOffset = 15
 	self.nPlayer1LeftOffset = 15
 	self.nPlayer2TopOffset = 15
@@ -444,6 +448,13 @@ function CardGame:PlayCard(wndCell)
 		Sound.Play(Sound.PlayUICraftingCoordinateHit)
 	end
 	
+	-- Update statistics
+	if self.strPhase == "Player1Turn" then
+		Statistics.AddCardsFlippedByPlayer(nFlipped)
+	else
+		Statistics.AddCardsFlippedByOpponent(nFlipped)
+	end
+	
 	-- Update the score
 	self:UpdateScore()
 	
@@ -490,7 +501,7 @@ end
 function CardGame:ShowOutcome()
 	local arLoserCards = nil
 	
-	-- TODO: Play a sound
+	-- Play a sound
 	Sound.Play(216)
 	
 	if self.strPhase == "Player1Win" then
@@ -501,6 +512,8 @@ function CardGame:ShowOutcome()
 		self.wndOutcome:FindChild("Prompt2"):SetText("")
 		arLoserCards = self.arPlayer2Cards
 		self.wndOutcome:FindChild("Accept"):Enable(false)
+		Statistics.AddGameWon(self.oPlayer2.nDifficulty, self.nPlayer1Score)
+		Statistics.AddOpponentDefeated(self.oPlayer2.nOpponentId)
 	elseif self.strPhase == "Player2Win" then
 		self.wndOutcome:FindChild("Victory"):Show(false, true)
 		self.wndOutcome:FindChild("Defeat"):Show(true, true)
@@ -509,6 +522,8 @@ function CardGame:ShowOutcome()
 		self.wndOutcome:FindChild("Prompt2"):SetText("")
 		arLoserCards = self.arPlayer1Cards
 		self.wndOutcome:FindChild("Accept"):Enable(false)
+		Statistics.AddGameLost(self.oPlayer2.nDifficulty, self.nPlayer1Score)
+		Statistics.AddOpponentDefeatedBy(self.oPlayer2.nOpponentId)
 	else
 		self.wndOutcome:FindChild("Victory"):Show(false, true)
 		self.wndOutcome:FindChild("Defeat"):Show(false, true)
@@ -516,6 +531,7 @@ function CardGame:ShowOutcome()
 		self.wndOutcome:FindChild("Prompt"):SetText("The game ended in a draw, neither player may select a card.")
 		self.wndOutcome:FindChild("Prompt2"):SetText("")
 		self.wndOutcome:FindChild("Accept"):Enable(true)
+		Statistics.AddGameDrawn(self.oPlayer2.nDifficulty)
 	end
 	
 	if arLoserCards then
@@ -668,7 +684,10 @@ function CardGame:OnOutcomeAcceptButton( wndHandler, wndControl, eMouseButton )
 	if self.oSelectedLoserCard then
 		-- Only fire the event for Player1 victory, as it will already have been fired for Player2 victory.
 		if self.strPhase == "Player1Win" then
+			Statistics.AddCardWonInGame()
 			Event_FireGenericEvent("Saikou:Cards_BattleComplete", { ["strResult"] = "Win", ["nCardId"] = self.oSelectedLoserCard.nCardId } ) 
+		else
+			Statistics.AddCardLostInGame()
 		end
 	end
 end

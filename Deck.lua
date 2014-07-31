@@ -178,7 +178,6 @@ function Deck:SetCategory(wndItem)
 end
 
 function Deck:PopulateCategory(bNoRearrange)
-	Print("PopulateCategory " .. self.strCategory)
 	local wndCardList = self.wndMain:FindChild("CardList")
 	
 	local bShowOwnedOnly = true

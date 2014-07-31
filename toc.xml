@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<Addon Author="Saikou" APIVersion="9" Name="Cards" Description="Collectible card mini-game." Version="0.7.2">
+<Addon Author="Saikou" APIVersion="9" Name="Cards" Description="Collectible card mini-game." Version="0.8">
     <Script Name="Libs\GeminiPackages.lua"/>
     <Script Name="Libs\CardsData.lua"/>
+    <Script Name="Statistics.lua"/>
     <Script Name="Card.lua"/>
     <Script Name="Collection.lua"/>
     <Script Name="Deck.lua"/>

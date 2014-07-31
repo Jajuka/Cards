@@ -94,41 +94,81 @@ end
 function CardGamePlayer:SetOpponent( tOpponent )
 	self.nCreatureId = tOpponent.nCreatureId
 	self.strName = tOpponent.strName
-	self.strBattleLine= tOpponent.strBattleLine
-	self.strWinLine = tOpponent.strWinLine
-	self.LossLine = tOpponent.LossLine 
+	self.nDifficulty = tOpponent.nDifficulty
+	self.nOpponentId = tOpponent.nOpponentId
 end
 
 
 function CardGamePlayer:ChooseDeck(tOpponentDeck, nDifficulty)
-	-- Copy quality, except:
-	-- 	10% chance for 1 lower
-	--	10% chance for higher if difficulty is easy or
-	--  20% chance for higher if difficulty is hard
-	-- If higher, then
-	--  75% chance for 1 tier higher
-	--  20% chance for 2 tiers higher
-	--	 5% chance for 3 tiers higher
+	--[[
+	
+	Difficulty 1 (easy)
+	
+	Plays best move with the caveat that it will occasionally disregard random possibilities, possibly missing good moves.
+	
+	50% same quality (capped at blue quality)
+	20% lower quality
+	25% higher quality (+1)
+	 5% higher quality (+2)
+
+	Difficulty 2 (medium)
+	
+	Plays best move with the caveat that it doesn't consider counter-plays and will happily leave low numbers exposed.
+
+	50% same quality (capped at blue quality)
+	10% lower quality
+	25% higher quality (+1)
+	10% higher quality (+2)
+	 5% higher quality (+3)
+	
+	Difficulty 3 (hard)
+	
+	Plays best move taking into account a single counter-play by the opponent. If the open rule is not in play, assumes a perfect 99 card will be played by the opponent.
+
+	50% same quality (capped at blue quality)
+	10% lower quality
+	25% higher quality (+1)
+	10% higher quality (+2)
+	 5% higher quality (+3)
+
+	]]--
+	
+	-- TODO: Revamp for 3 difficulty levels.
+	local arDeck = {}
+	if nDifficulty == 1 then
+		arDeck = self:BuildEasyDeck(tOpponentDeck)
+	elseif nDifficulty == 2 then
+		arDeck = self:BuildMediumDeck(tOpponentDeck)
+	else
+		arDeck = self:BuildHardDeck(tOpponentDeck)
+	end
+	self:SetDeck(arDeck)
+end
+
+function CardGamePlayer:BuildEasyDeck( tOpponentDeck )	
+	-- Easy decks generally match the opponent's, with some deviation. Generally won't be higher than green quality, with the occasional blue, and the rare purple.
+
+	-- 50% same (green)
+	-- 22% -1 (white)
+	-- 22% +1 (blue)
+	-- 1% +2 (purple)
+	
 	local arDeck = {}
 	for nIndex = 1, 5 do
 		local nComparisonCardId = tOpponentDeck[nIndex]
 		local nQualityId = CardsData.karCards[nComparisonCardId].nQualityID
+		if nQualityId > 3 then nQualityId = 3 end
 		local nDeviation = 0
-		local nRandom = math.random(10)
-		if nRandom == 1 then
+		local nRandom = math.random(100)
+		if nRandom <= 22 then
 			-- Lower quality
 			nDeviation = -1
-		elseif nRandom == 2 or (nRandom == 3 and nDifficulty == 1) then
-			-- Higher quality
+		elseif nRandom <= 44 then
+			-- Higher quality (+1)
 			nDeviation = 1
-			nRandom = math.random(100)
-			if nRandom <= 75 then
-				nDeviation = 1
-			elseif nRandom <= 95 then
-				nDeviation = 2
-			else
-				nDeviation = 3
-			end
+		elseif nRandom == 100 then
+			-- Higher quality (+2)
+			nDeviation = 2
 		else
 			-- Same quality
 			nDeviation = 0
@@ -137,14 +177,104 @@ function CardGamePlayer:ChooseDeck(tOpponentDeck, nDifficulty)
 		nQualityId = nQualityId + nDeviation
 		
 		if nQualityId < 1 then nQualityId = 1 end
-		if nQualityId > 7 then nQualityId = 7 end	-- TODO: Not sure we really want amazing decks to end up playing against mostly artifacts, will see how it goes.
+		if nQualityId > 7 then nQualityId = 7 end
 		
 		-- Choose a random card of the selected quality
-		local nCardId = CardsData.tByQuality[nQualityId][math.random(#CardsData.tByQuality[nQualityId])].nCardId
+		local nCardId = CardsData.tCardsByQuality[nQualityId][math.random(#CardsData.tCardsByQuality[nQualityId])].nCardId
 		arDeck[nIndex] = nCardId
 	end
-	self:SetDeck(arDeck)
+	
+	return arDeck
 end
+
+function CardGamePlayer:BuildMediumDeck( tOpponentDeck )	
+	-- Medium decks generally match the opponent's, with some deviation. Generally won't be higher than blue quality, with the occasional purple, the rare orange, and the very rare magenta.
+
+	-- 50% same (blue)
+	-- 20% -1 (green)
+	-- 20% +1 (purple)
+	-- 4% +2 (orange)
+	-- 1% +3 (pink)
+	
+	local arDeck = {}
+	for nIndex = 1, 5 do
+		local nComparisonCardId = tOpponentDeck[nIndex]
+		local nQualityId = CardsData.karCards[nComparisonCardId].nQualityID
+		if nQualityId > 4 then nQualityId = 4 end
+		local nDeviation = 0
+		local nRandom = math.random(100)
+		if nRandom <= 20 then
+			-- Lower quality
+			nDeviation = -1
+		elseif nRandom <= 40 then
+			-- Higher quality (+1)
+			nDeviation = 1
+		elseif nRandom == 100 then
+			-- Higher quality (+3)
+			nDeviation = 3
+		elseif nRandom >= 95 then
+			-- Higher quality (+2)
+			nDeviation = 2
+		else
+			-- Same quality
+			nDeviation = 0
+		end
+		
+		nQualityId = nQualityId + nDeviation
+		
+		if nQualityId < 1 then nQualityId = 1 end
+		if nQualityId > 7 then nQualityId = 7 end
+		
+		-- Choose a random card of the selected quality
+		local nCardId = CardsData.tCardsByQuality[nQualityId][math.random(#CardsData.tCardsByQuality[nQualityId])].nCardId
+		arDeck[nIndex] = nCardId
+	end
+	
+	return arDeck
+end
+
+function CardGamePlayer:BuildHardDeck( tOpponentDeck )	
+	-- Hard decks generally match the opponent's, with some slight deviation.
+
+	-- 59% same (blue)
+	-- 20% -1 (green)
+	-- 20% +1 (purple)
+	-- 1% +2 (orange)
+	
+	local arDeck = {}
+	for nIndex = 1, 5 do
+		local nComparisonCardId = tOpponentDeck[nIndex]
+		local nQualityId = CardsData.karCards[nComparisonCardId].nQualityID
+		if nQualityId > 4 then nQualityId = 5 end
+		local nDeviation = 0
+		local nRandom = math.random(100)
+		if nRandom <= 20 then
+			-- Lower quality
+			nDeviation = -1
+		elseif nRandom <= 40 then
+			-- Higher quality (+1)
+			nDeviation = 1
+		elseif nRandom == 100 then
+			-- Higher quality (+3)
+			nDeviation = 2
+		else
+			-- Same quality
+			nDeviation = 0
+		end
+		
+		nQualityId = nQualityId + nDeviation
+		
+		if nQualityId < 1 then nQualityId = 1 end
+		if nQualityId > 7 then nQualityId = 7 end
+		
+		-- Choose a random card of the selected quality
+		local nCardId = CardsData.tCardsByQuality[nQualityId][math.random(#CardsData.tCardsByQuality[nQualityId])].nCardId
+		arDeck[nIndex] = nCardId
+	end
+	
+	return arDeck
+end
+
 
 
 function CardGamePlayer:DetermineMove( tBoard, arPlayerCards )
@@ -154,6 +284,9 @@ function CardGamePlayer:DetermineMove( tBoard, arPlayerCards )
 	--	.nColumn
 	--	.nOwnScoreChange
 	--	.nOpponentScoreChange
+	
+	-- TODO: Act differently per difficulty.
+	
 	local tMoves = {}
 	
 	-- For each card
@@ -170,6 +303,18 @@ function CardGamePlayer:DetermineMove( tBoard, arPlayerCards )
 					end
 				end
 			end
+		end
+	end
+	
+	-- If the difficulty is easy, disregard a random 10% of the moves (assuming there's at least a few valid moves).
+	if self.nDifficulty == 1 and #tMoves > 3 then
+		local nMovesToIgnore = math.floor(#tMoves / 4)
+		for i = #tMoves, 2, -1 do -- backwards
+		    local r = math.random(i) -- select a random number between 1 and i
+		    tMoves[i], tMoves[r] = tMoves[r], tMoves[i] -- swap the randomly selected item to position i
+		end  		
+		for nIndex = 1, nMovesToIgnore do
+			table.remove(tMoves)
 		end
 	end
 	
