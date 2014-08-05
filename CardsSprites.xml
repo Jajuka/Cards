@@ -315,7 +315,7 @@
     <Sprite Name="094_StormtalonsLair" Cycle="1">
         <Frame Texture="Cards\Images\Cards.png" x0="1820" x1="1820" x2="1960" x3="1960" x4="1960" x5="1960" y0="900" y1="900" y2="1080" y3="1080" y4="1080" y5="1080" Stretchy="1" HotspotX="70" HotspotY="90" Duration="1.000" StartColor="ffffffff" EndColor="ffffffff"/>
     </Sprite>
-    <Sprite Name="095_KelVorath" Cycle="1">
+    <Sprite Name="095_KelVoreth" Cycle="1">
         <Frame Texture="Cards\Images\Cards.png" x0="1960" x1="1960" x2="2100" x3="2100" x4="2100" x5="2100" y0="900" y1="900" y2="1080" y3="1080" y4="1080" y5="1080" Stretchy="1" HotspotX="70" HotspotY="90" Duration="1.000" StartColor="ffffffff" EndColor="ffffffff"/>
     </Sprite>
     <Sprite Name="096_Skullcano" Cycle="1">

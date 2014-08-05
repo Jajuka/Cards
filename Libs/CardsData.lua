@@ -158,7 +158,7 @@ CardsData.karCards =
 	[92] = { nCardId = 92, nNumber = 92, strCategory = "Dominion", strName = "Mechari", nQualityID = 3, nTop = 6, nRight = 5, nBottom = 1, nLeft = 3, strFlair = "", strSprite = "CardsSprites:092_Mechari" },
 	[93] = { nCardId = 93, nNumber = 93, strCategory = "Dominion", strName = "Dominion Warbot", nQualityID = 2, nTop = 3, nRight = 5, nBottom = 2, nLeft = 2, strFlair = "", strSprite = "CardsSprites:093_DominionWarbot" },
 	[94] = { nCardId = 94, nNumber = 94, strCategory = "Dungeons", strName = "Stormtalon's Lair", nQualityID = 5, nTop = 3, nRight = 3, nBottom = 8, nLeft = 7, strFlair = "", strSprite = "CardsSprites:094_StormtalonsLair" },
-	[95] = { nCardId = 95, nNumber = 95, strCategory = "Dungeons", strName = "Kel Vorath", nQualityID = 5, nTop = 5, nRight = 3, nBottom = 5, nLeft = 8, strFlair = "", strSprite = "CardsSprites:095_KelVorath" },
+	[95] = { nCardId = 95, nNumber = 95, strCategory = "Dungeons", strName = "Kel Voreth", nQualityID = 5, nTop = 5, nRight = 3, nBottom = 5, nLeft = 8, strFlair = "", strSprite = "CardsSprites:095_KelVoreth" },
 	[96] = { nCardId = 96, nNumber = 96, strCategory = "Dungeons", strName = "Skullcano", nQualityID = 5, nTop = 3, nRight = 8, nBottom = 6, nLeft = 4, strFlair = "", strSprite = "CardsSprites:096_Skullcano" },
 	[97] = { nCardId = 97, nNumber = 97, strCategory = "Dungeons", strName = "Sanctuary of the Swordmaiden", nQualityID = 5, nTop = 8, nRight = 4, nBottom = 4, nLeft = 5, strFlair = "", strSprite = "CardsSprites:097_SanctuarySwordmaiden" },
 	[98] = { nCardId = 98, nNumber = 98, strCategory = "Exiles", strName = "The Exiles", nQualityID = 4, nTop = 3, nRight = 6, nBottom = 6, nLeft = 3, strFlair = "", strSprite = "CardsSprites:098_Exiles" },
