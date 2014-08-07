@@ -38,10 +38,14 @@ CardGame.kDeckCardHeight = 115
 CardGame.kDeckCardOverlapHeight = 113
 CardGame.kDeckCardFlyoutWidth = 45
 
+CardGame.kclrCardOwned = ApolloColor.new("DispositionFriendlyUnflagged")
+CardGame.kclrCardPreviouslyOwned = ApolloColor.new("DispositionNeutral")
+CardGame.kclrCardNotOwned = ApolloColor.new("White")
+
 -----------------------------------------------------------------------------------------------
 -- Initialization
 -----------------------------------------------------------------------------------------------
-function CardGame.new( a, oPlayer1, oPlayer2 )
+function CardGame.new( a, oPlayer1, oPlayer2, tCollection )
 	local self = setmetatable({}, CardGame)
 
 	self.strPhase = nil
@@ -49,6 +53,7 @@ function CardGame.new( a, oPlayer1, oPlayer2 )
 	self.oPlayer2 = oPlayer2
 	self.nPlayer1Score = 5
 	self.nPlayer2Score = 5
+	self.tCollection = tCollection
 	
 	-- Create timers.	
 	self.tmrIntro = ApolloTimer.Create(3, true, "OnIntroCompleteTimer", self)		
@@ -540,6 +545,18 @@ function CardGame:ShowOutcome()
 			local wndCardContainer = self.wndOutcome:FindChild("Card" .. nIndex)
 			local oCard = Card.new(arLoserCards[nIndex].nCardId, wndCardContainer, true, true, nil, nil, self)
 			oCard.bIsLoserSelect = true
+			local wndName = self.wndOutcome:FindChild("Card" .. nIndex .. "Name")
+			wndName:SetText(oCard.strName)
+			if self.tCollection[oCard.nCardId] and self.tCollection[oCard.nCardId] > 0 then
+				wndName:SetTextColor(CardGame.kclrCardOwned)
+				wndName:SetTooltip("You already own " .. self.tCollection[oCard.nCardId] .. " copies of this card.")
+			elseif self.tCollection[oCard.nCardId] and self.tCollection[oCard.nCardId] == 0 then
+				wndName:SetTextColor(CardGame.kclrCardPreviouslyOwned)
+				wndName:SetTooltip("You previously owned and lost this card.")
+			else
+				wndName:SetTextColor(CardGame.kclrCardNotOwned)
+				wndName:SetTooltip("You do not own this card.")
+			end
 			table.insert(self.arLoserCards, oCard)
 		end
 	end
@@ -566,7 +583,7 @@ end
 function CardGame:OnCardClick( wndHandler, wndControl, eMouseButton )
 	local oCard = wndControl:GetData()
 	
-	if oCard.bIsLoserSelect then
+	if oCard.bIsLoserSelect and self.strPhase == "Player1Win" then
 		if oCard.bAnimating then
 			return
 		end

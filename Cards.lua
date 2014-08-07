@@ -362,7 +362,7 @@ function Cards:OnBattleStart( tArgs )
 	oPlayer2:SetOpponent(tOpponent)
 	oPlayer2:ChooseDeck(self.tDeck, self.nOpponentDifficulty)
 	
-	self.oGame = CardGame:new(oPlayer1, oPlayer2)
+	self.oGame = CardGame:new(oPlayer1, oPlayer2, self.tCollection)
 	self.oGame:Initialise()
 	self.oGame.wndMain:Invoke()
 end
