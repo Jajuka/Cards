@@ -16,6 +16,7 @@ local CardGamePlayer = _G["Saikou:CardsLibs"]["CardGamePlayer"]
 local CardGame = _G["Saikou:CardsLibs"]["CardGame"]
 local Collection = _G["Saikou:CardsLibs"]["Collection"]
 local Deck = _G["Saikou:CardsLibs"]["Deck"]
+local Players = _G["Saikou:CardsLibs"]["Players"]
 
 -----------------------------------------------------------------------------------------------
 -- Constants
@@ -92,9 +93,10 @@ function Cards:OnDocLoaded()
 		Apollo.RegisterEventHandler("Saikou:Cards_MiniButton", "OnSlashCommand", self)
 		Apollo.RegisterEventHandler("Saikou:Cards_BattleStart", "OnBattleStart", self)
 		Apollo.RegisterEventHandler("Saikou:Cards_BattleComplete", "OnBattleComplete", self)
-			
-		-- Register event handlers.
+		Apollo.RegisterEventHandler("Saikou:Cards_ShowPlayerStatistics", "OnViewPlayerStatistics", self)
 		Apollo.RegisterEventHandler("CombatLogDamage", "OnCombatLogDamage", self)
+		
+		self.oChannel = ICCommLib.JoinChannel("chanSaikouCards", "OnChannelMessageReceived", self)
 		
 		-- Create timers.
         self.tmrLootCardAnimate = ApolloTimer.Create(0.01, true, "OnLootCardAnimateTimer", self)		
@@ -106,6 +108,23 @@ function Cards:OnDocLoaded()
 		self:InitLootFrame()
 		
 	end
+end
+
+function Cards:OnChannelMessageReceived( oChannel, tMessage, strSender )
+	Print("Relaying channel message from " .. strSender)
+
+	-- Ensure it's a valid message.
+	if not tMessage or not tMessage.strCommand then
+		return
+	end
+
+	if tMessage.strType == "Players" then
+		Print("- Relaying message to Players module.")
+		self:GetPlayersModule()
+		self.oPlayers:OnChannelMessageReceived(oChannel , tMessage, strSender)
+	else
+		Print("Unknown message, cannot relay.")
+	end		
 end
 
 -----------------------------------------------------------------------------------------------
@@ -317,6 +336,11 @@ function Cards:RemoveCardFromCollection(nCardId)
 end
 
 
+function Cards:OnViewPlayerStatistics( tArgs )
+	Statistics.Populate(self.wndStatistics, tArgs.tStatistics, tArgs.strName)
+	self.wndStatistics:Show(true)
+	self.wndStatistics:ToFront()
+end
 
 -----------------------------------------------------------------------------------------------
 -- MenuWindow Functions
@@ -392,7 +416,19 @@ function Cards:OnMenuStatisticsButton( wndHandler, wndControl, eMouseButton )
 	self.wndStatistics:Show(true)
 end
 
-function Cards:OnMenuTutorialButton( wndHandler, wndControl, eMouseButton )
+function Cards:GetPlayersModule()
+	if self.oPlayers then
+		return self.oPlayers
+	end
+	self.oPlayers = Players:new()
+	self.oPlayers:Initialise(self.tCollection, self.oChannel)
+	return self.oPlayers
+end
+
+function Cards:OnMenuPlayersButton( wndHandler, wndControl, eMouseButton )
+	self:GetPlayersModule()
+	self.oPlayers.wndMain:Invoke()
+	self.wndMenu:Show(false)
 end
 
 -----------------------------------------------------------------------------------
@@ -560,10 +596,18 @@ if _G["Saikou:CardsLibs"] == nil then
 	_G["Saikou:CardsLibs"] = { }
 end
 
+
+
+---------------------------------------------------------------------------------------------------
+-- PlayerListItem Functions
+---------------------------------------------------------------------------------------------------
+
+---------------------------------------------------------------------------------------------------
+-- PlayersWindow Functions
+---------------------------------------------------------------------------------------------------
+
 local CardsInst = Cards:new()
 CardsInst:Init()
 
 return Cards
-
-
 

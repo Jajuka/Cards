@@ -6,6 +6,7 @@
     <Script Name="Card.lua"/>
     <Script Name="Collection.lua"/>
     <Script Name="Deck.lua"/>
+    <Script Name="Players.lua"/>
     <Script Name="CardGamePlayer.lua"/>
     <Script Name="CardGame.lua"/>
     <Script Name="Cards.lua"/>
