@@ -15,6 +15,9 @@
     <Sprite Name="Statistics" Cycle="1">
         <Frame Texture="Cards\Images\Statistics.png" x0="0" x1="0" x2="200" x3="200" x4="200" x5="200" y0="0" y1="0" y2="125" y3="125" y4="125" y5="125" Stretchy="1" HotspotX="32" HotspotY="128" Duration="1.000" StartColor="ffffffff" EndColor="ffffffff"/>
     </Sprite>
+    <Sprite Name="Players" Cycle="1">
+        <Frame Texture="Cards\Images\Players.png" x0="0" x1="0" x2="200" x3="200" x4="200" x5="200" y0="0" y1="0" y2="125" y3="125" y4="125" y5="125" Stretchy="1" HotspotX="32" HotspotY="128" Duration="1.000" StartColor="ffffffff" EndColor="ffffffff"/>
+    </Sprite>
     <Sprite Name="SpeechLeft" Cycle="1">
         <Frame Texture="Cards\Images\Speech.png" x0="0" x1="0" x2="71" x3="72" x4="299" x5="372" y0="0" y1="0" y2="97" y3="98" y4="214" y5="270" Stretchy="1" HotspotX="0" HotspotY="0" Duration="1.000" StartColor="white" EndColor="white"/>
     </Sprite>

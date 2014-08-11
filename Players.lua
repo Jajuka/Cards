@@ -22,6 +22,29 @@ setmetatable(Players, {
 -----------------------------------------------------------------------------------------------
 -- Constants
 -----------------------------------------------------------------------------------------------
+Players.karClasses =
+{
+	[GameLib.CodeEnumClass.Engineer] 		= "Engineer",
+	[GameLib.CodeEnumClass.Esper] 			= "Esper",
+	[GameLib.CodeEnumClass.Medic] 			= "Medic",
+	[GameLib.CodeEnumClass.Spellslinger] 	= "Spellslinger",
+	[GameLib.CodeEnumClass.Stalker] 		= "Stalker",
+	[GameLib.CodeEnumClass.Warrior] 		= "Warrior",
+}
+Players.karRaces =
+{
+	[GameLib.CodeEnumRace.Aurin] 			= "Aurin",
+	[GameLib.CodeEnumRace.Chua] 			= "Chua",
+	[GameLib.CodeEnumRace.Draken] 			= "Draken",
+	[GameLib.CodeEnumRace.Granok] 			= "Granok",
+	[GameLib.CodeEnumRace.Human] 			= -- Human is a special case, as I like to treat exile humans as "Humans" and dominion humans as "Cassians".
+		{
+			[Unit.CodeEnumFaction.DominionPlayer] 	= "Cassian",
+			[Unit.CodeEnumFaction.ExilesPlayer] 	= "Human",
+		},
+	[GameLib.CodeEnumRace.Mechari] 			= "Mechari",
+	[GameLib.CodeEnumRace.Mordesh] 			= "Mordesh",
+}
 
 -----------------------------------------------------------------------------------------------
 -- Initialization
@@ -78,89 +101,8 @@ function Players:BeginSearch()
 	
 	local wndContainer = self.wndMain:FindChild("List")
 	wndContainer:DestroyChildren()
-	Print("Sending ping command.")
 	self.oChannel:SendMessage( { strType = "Players", strCommand = "Ping" } )
 	self.tmrRefresh:Start()
-	
-	-- Simulate some pongs.
-	--[[
-	self:OnChannelMessageReceived(self.oChannel, {
-		strCommand = "Pong",
-		strName = "Luxenia",
-		strGuild = nil,
-		strCircles =
-		{
-			"Farming Circle",
-			"Mining Circle",
-		},
-		nLevel = 50,
-		strRace = "Aurin",
-		strClass = "Stalker",
-		strPath = "Explorer",
-		blnAllowChallenge = true,
-		fltCompletion = 0.58,
-	}, "Luxenia")
-	self:OnChannelMessageReceived(self.oChannel, {
-		strCommand = "Pong",
-		strName = "Artina",
-		strGuild = nil,
-		strCircles = { },
-		nLevel = 35,
-		strRace = "Aurin",
-		strClass = "Spellslinger",
-		strPath = "Settler",
-		blnAllowChallenge = false,
-		fltCompletion = 0.19,
-	}, "Artina")
-	self:OnChannelMessageReceived(self.oChannel, {
-		strCommand = "Pong",
-		strName = "Jajuka",
-		strGuild = nil,
-		strCircles = { },
-		nLevel = 23,
-		strRace = "Human",
-		strClass = "Warrior",
-		strPath = "Scientist",
-		blnAllowChallenge = true,
-		fltCompletion = 0.98,
-	}, "Jajuka")
-	self:OnChannelMessageReceived(self.oChannel, {
-		strCommand = "Pong",
-		strName = "Luxeni",
-		strGuild = nil,
-		strCircles = { },
-		nLevel = 21,
-		strRace = "Human",
-		strClass = "Esper",
-		strPath = "Scientist",
-		blnAllowChallenge = false,
-		fltCompletion = 0.10,
-	}, "Luxeni")
-	self:OnChannelMessageReceived(self.oChannel, {
-		strCommand = "Pong",
-		strName = "Luxen",
-		strGuild = "Kernel Panic",
-		strCircles = { },
-		nLevel = 11,
-		strRace = "Mordesh",
-		strClass = "Medic",
-		strPath = "Soldier",
-		blnAllowChallenge = true,
-		fltCompletion = 0.00,
-	}, "Luxen")
-	self:OnChannelMessageReceived(self.oChannel, {
-		strCommand = "Pong",
-		strName = "Valvatorez",
-		strGuild = "Kernel Panic",
-		strCircles = { },
-		nLevel = 3,
-		strRace = "Granok",
-		strClass = "Engineer",
-		strPath = "Soldier",
-		blnAllowChallenge = false,
-		fltCompletion = 0.00,
-	}, "Luxen")
-	]]--
 end
 
 function Players:EndSearch()
@@ -169,7 +111,7 @@ function Players:EndSearch()
 
 	self.wndMain:FindChild("FriendsOnlyButton"):Enable(true)
 	self.wndMain:FindChild("GuildOnlyButton"):Enable(true)
-	self.wndMain:FindChild("CirclesOnlyButton"):Enable(true)
+	self.wndMain:FindChild("CirclesOnlyButton"):Enable(false)
 	self.wndMain:FindChild("NameFilter"):Enable(true)
 	self.wndMain:FindChild("Clear"):Enable(true)
 	self.wndMain:FindChild("RefreshButton"):Enable(true)
@@ -214,7 +156,7 @@ function Players:Update()
 		end
 	end
 	
-	-- Determine circles information.
+	-- TODO: Determine circles information.
 	
 	local wndContainer = self.wndMain:FindChild("List")
 	for nIndex, wndItem in pairs(wndContainer:GetChildren()) do
@@ -259,8 +201,6 @@ function Players:Update()
 end
 
 function Players:CreateListItem( tMessage )
-	CardsData.Print_r(tMessage)
-	
 	local wndContainer = self.wndMain:FindChild("List")
 	local wndItem = Apollo.LoadForm(CardsData.xmlDoc, "PlayerListItem", wndContainer, self)
 	wndItem:SetData(tMessage)
@@ -280,24 +220,47 @@ function Players:CreateListItem( tMessage )
 	wndItem:FindChild("Collection"):Enable(false)
 	wndItem:FindChild("Collection"):FindChild("Icon"):SetBGColor("ff555555")
 	
+	local tFriends = FriendshipLib.GetList()
+	local tFriendsData = {}
+	if tFriends then
+		-- Convert the friends data into a more easily consumed format.
+		for key, tFriend in pairs(tFriends) do
+			tFriendsData[tFriend.strCharacterName] = tFriend
+		end
+	end
+
 	local bIsFriend = false
 	local bIsGuild = false
 	local bIsCircle = false
 	
+	if tFriendsData[tMessage.strName] then
+		bIsFriend = true
+	end
+	
+	if GameLib.GetPlayerUnit():GetGuildName() == tMessage.strGuild then
+		bIsGuild = true
+	end	
+	
 	if bIsFriend then
 		wndItem:FindChild("Friend"):SetBGColor("white")
+		wndItem:FindChild("Friend"):SetTooltip("This player is a friend.")
 	else
 		wndItem:FindChild("Friend"):SetBGColor("ff555555")
+		wndItem:FindChild("Friend"):SetTooltip("This player is not on your friend list.")
 	end
 	if bIsGuild then
 		wndItem:FindChild("Guild"):SetBGColor("white")
+		wndItem:FindChild("Guild"):SetTooltip("This player is in your guild.")
 	else
 		wndItem:FindChild("Guild"):SetBGColor("ff555555")
+		wndItem:FindChild("Guild"):SetTooltip("This player is not in your guild.")
 	end
 	if bIsCircle then
 		wndItem:FindChild("Circle"):SetBGColor("white")
+		wndItem:FindChild("Circle"):SetTooltip("This player in in one of your circles.")	-- TODO: Mention which.
 	else
 		wndItem:FindChild("Circle"):SetBGColor("ff555555")
+		wndItem:FindChild("Circle"):SetTooltip("This player is not in any of your circles.")
 	end
 	return wndItem
 end
@@ -361,16 +324,12 @@ function Players:OnPlayerWhisperButton( wndHandler, wndControl, eMouseButton )
 end
 
 function Players:OnPlayerCollectionButton( wndHandler, wndControl, eMouseButton )
-	-- TODO: Replace simulated message with actual one.
-	--self:OnChannelMessageReceived(self.oChannel, { strCommand = "RequestCollection" }, GameLib.GetPlayerUnit():GetName())
-	local tData = wndControl:GetData()
+	local tData = wndControl:GetParent():GetData()
 	self.oChannel:SendMessage({ tData.strName }, { strType = "Players", strCommand = "RequestStats" })
 end
 
 function Players:OnPlayerStatisticsButton( wndHandler, wndControl, eMouseButton )
-	-- TODO: Replace simulated message with actual one.
-	--self:OnChannelMessageReceived(self.oChannel, { strCommand = "RequestStats" }, GameLib.GetPlayerUnit():GetName())
-	local tData = wndControl:GetData()
+	local tData = wndControl:GetParent():GetData()
 	self.oChannel:SendPrivateMessage({ tData.strName }, { strType = "Players", strCommand = "RequestStats" })
 end
 
@@ -380,31 +339,32 @@ end
 -- Channel Functions
 ---------------------------------------------------------------------------------------------------
 function Players:OnChannelMessageReceived( oChannel, tMessage, strSender )
-	Print("Message received from " .. strSender)
+	--Print("Message received from " .. strSender)
 	-- Ensure it's a valid message.
 	if not tMessage or not tMessage.strCommand then
 		return
 	end
 
-	Print(tMessage.strCommand)
+	--Print(tMessage.strCommand)
 	
 	if tMessage.strCommand == "Ping" then
 		-- TODO: Send a response (assuming requestor isn't on ignore list).
-		Print("Sending pong command.")
+		--Print("Sending pong command.")
 		self.oChannel:SendMessage(self:CreatePingPongResponse())
 	elseif tMessage.strCommand == "Pong" and self.bListeningForPingPongResponses then
 		-- Create a list item for the ping responder.
 		self:CreateListItem(tMessage)
 	elseif tMessage.strCommand == "RequestStats" then
-		-- TODO: Send a response (assuming requestor isn't on ignore list).
-		-- TODO: Replace simulated message with actual one.
+		-- Send a response with our statistics (assuming requestor isn't on ignore list).
 		--self:OnChannelMessageReceived(self.oChannel, { strCommand = "ReceiveStats", tStatistics = Statistics.Calculate() }, GameLib.GetPlayerUnit():GetName())
-		Print("Sending stats command to " .. strSender)
+		--Print("Sending stats command to " .. strSender)
 		self.oChannel:SendPrivateMessage({ strSender }, { strType = "Players", strCommand = "ReceiveStats", tStatistics = Statistics.Calculate() })
+		--CardsData.Print_r(Statistics.Calculate())
 	elseif tMessage.strCommand == "ReceiveStats" then
 		-- Received someone's stats, so show the statistics window.
 		if tMessage.tStatistics then
 			Event_FireGenericEvent("Saikou:Cards_ShowPlayerStatistics", { tStatistics = tMessage.tStatistics, strName = strSender })
+			--CardsData.Print_r(tMessage.tStatistics)
 		end
 	elseif tMessage.strCommand == "RequestCollection" then
 		-- TODO: Send a response (assuming requestor isn't on ignore list).
@@ -414,6 +374,9 @@ function Players:OnChannelMessageReceived( oChannel, tMessage, strSender )
 end
 
 
+---------------------------------------------------------------------------------------------------
+-- Helper Functions
+---------------------------------------------------------------------------------------------------
 function Players:CreatePingPongResponse()
 	local oPlayer = GameLib.GetPlayerUnit()
 	return
@@ -425,8 +388,7 @@ function Players:CreatePingPongResponse()
 		strCircles = { },
 		nLevel = oPlayer:GetLevel(),
 		strRace = Players.RaceIdToString(oPlayer:GetRaceId(), oPlayer:GetFaction()),
-		strClass = "Engineer",
-		strPath = "Soldier",
+		strClass = Players.ClassIdToString(oPlayer:GetClassId()),
 		bAllowChallenge = false,
 		fCompletion = self:CalculateCollectionCompletion(),
 	}
@@ -443,28 +405,18 @@ function Players:CalculateCollectionCompletion()
 end
 
 function Players.RaceIdToString( eRaceId, eFaction )
-	if eRaceId == GameLib.CodeEnumRace.Aurin then
-		return "Aurin"
-	elseif eRaceId == GameLib.CodeEnumRace.Chua then
-		return "Chua"
-	elseif eRaceId == GameLib.CodeEnumRace.Draken then
-		return "Draken"
-	elseif eRaceId == GameLib.CodeEnumRace.Granok then
-		return "Granok"
-	elseif eRaceId == GameLib.CodeEnumRace.Human then
-		if eFaction == Unit.CodeEnumFaction.ExilesPlayer then
-			return "Human"
-		else
-			return "Cassian"
-		end
-	elseif eRaceId == GameLib.CodeEnumRace.Mechari then
-		return "Mechari"
-	elseif eRaceId == GameLib.CodeEnumRace.Mordesh then
-		return "Mordesh"
+	if type(Players.karRaces[eRaceId]) == "string" then
+		return Players.karRaces[eRaceId]
 	else
-		return "Unknown"
+		return Players.karRaces[eRaceId][eFaction]
 	end
 end
+
+function Players.ClassIdToString( eClassId )
+	return Players.karClasses[eClassId]
+end
+
+
 
 if _G["Saikou:CardsLibs"] == nil then
 	_G["Saikou:CardsLibs"] = { }

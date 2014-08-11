@@ -144,7 +144,7 @@ function Collection:CalculateOwned(strCategory)
 			nAllOwned = nAllOwned + tCategory.nOwned
 		end
 		self:AddCategory("All", nAllOwned / #CardsData.karCards)
-		self.wndMain:FindChild("OverallCompletionPercentage"):SetText(string.format("%.0f%%", nAllUniqueOwned / #CardsData.karCards * 100))
+		self.wndMain:FindChild("OverallCompletionPercentage"):SetText(string.format("%.0f%%", math.floor(nAllUniqueOwned / #CardsData.karCards * 100)))
 		self.wndMain:FindChild("UniqueCards"):SetText(nAllUniqueOwned .. " of " .. #CardsData.karCards)
 		self.wndMain:FindChild("TotalCards"):SetText(nAllOwned)
 	end

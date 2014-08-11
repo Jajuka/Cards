@@ -34,9 +34,11 @@ function Statistics.Initialise( tStatistics, tCollection )
 	Statistics.tCollection = tCollection
 end
 
-function Statistics.Populate( wndMain )
-	local nUniqueOpponentsEncountered = #(Statistics.tStatistics.arOpponentsEncountered or {})
-	local nUniqueOpponentsDefeated = #(Statistics.tStatistics.arOpponentsDefeated or {})
+function Statistics.Calculate()
+	local nUniqueOpponentsEncountered = 0
+	local nUniqueOpponentsDefeated = 0
+	for _ in pairs(Statistics.tStatistics.arOpponentsEncountered or {}) do nUniqueOpponentsEncountered = nUniqueOpponentsEncountered + 1 end
+	for _ in pairs(Statistics.tStatistics.arOpponentsDefeated or {}) do nUniqueOpponentsDefeated = nUniqueOpponentsDefeated + 1 end
 	local arFlipsByYou = Statistics.tStatistics.arFlipsByYou or {}
 	local arFlipsByOpponent = Statistics.tStatistics.arFlipsByOpponent or {}
 	local arDifficultyGamesWon = Statistics.tStatistics.arDifficultyGamesWon or {}
@@ -85,46 +87,84 @@ function Statistics.Populate( wndMain )
 		strMostDefeatedByOpponent = string.format("%s (x%d)", CardsData.tOpponentsById[nMostDefeatedByOpponentId].strName, nMostDefeatedByOpponentCount)
 	end
 	Statistics.AddCollectionUpdated()
+	
+	return
+	{
+		nCardsFoundFromKills = Statistics.tStatistics.nCardsFoundFromKills,
+		nCardsWonInGames = Statistics.tStatistics.nCardsWonInGames,
+		nCardsLostInGames = Statistics.tStatistics.nCardsLostInGames,
+		nUniqueCardsOwned = Statistics.tStatistics.nUniqueCardsOwned,
+		nMostUniqueCardsOwned = Statistics.tStatistics.nMostUniqueCardsOwned,
+		arFlipsByYou = arFlipsByYou,
+		arFlipsByOpponent = arFlipsByOpponent,
+		arDifficultyGamesWon = arDifficultyGamesWon,
+		arDifficultyGamesLost = arDifficultyGamesLost,
+		arDifficultyGamesDrawn = arDifficultyGamesDrawn,
+		nTotalGamesPlayed = Statistics.tStatistics.nTotalGamesPlayed,
+		nTotalGamesWon = Statistics.tStatistics.nTotalGamesWon,
+		nTotalGamesLost = Statistics.tStatistics.nTotalGamesLost,
+		nTotalGamesDrawn = Statistics.tStatistics.nTotalGamesDrawn,
+		nBestWinningScore = Statistics.tStatistics.nBestWinningScore,
+		nWorstLosingScore = Statistics.tStatistics.nWorstLosingScore,
+		strAverageWinningScore = strAverageWinningScore,
+		strAverageLosingScore = strAverageLosingScore,
+		strAverageOverallScore = strAverageOverallScore,
+		nUniqueOpponentsEncountered = nUniqueOpponentsEncountered,
+		nUniqueOpponentsDefeated = nUniqueOpponentsDefeated,
+		strMostEncounteredOpponent = strMostEncounteredOpponent,
+		strMostDefeatedOpponent = strMostDefeatedOpponent,
+		strMostDefeatedByOpponent = strMostDefeatedByOpponent,
+	}
+end
 
-	wndMain:FindChild("CardsFoundFromKills"):SetText(Statistics.tStatistics.nCardsFoundFromKills or 0)
-	wndMain:FindChild("CardsWonFromGames"):SetText(Statistics.tStatistics.nCardsWonInGames or 0)
-	wndMain:FindChild("CardsLostInGames"):SetText(Statistics.tStatistics.nCardsLostInGames or 0)
-	wndMain:FindChild("UniqueCardsOwned"):SetText(Statistics.tStatistics.nUniqueCardsOwned or 0)
-	wndMain:FindChild("MostUniqueCardsOwned"):SetText(Statistics.tStatistics.nMostUniqueCardsOwned or 0)
-	wndMain:FindChild("YouCardsFlipped"):SetText(arFlipsByYou[0] or 0)
-	wndMain:FindChild("YouFlipped1"):SetText(arFlipsByYou[1] or 0)
-	wndMain:FindChild("YouFlipped2"):SetText(arFlipsByYou[2] or 0)
-	wndMain:FindChild("YouFlipped3"):SetText(arFlipsByYou[3] or 0)
-	wndMain:FindChild("YouFlipped4"):SetText(arFlipsByYou[4] or 0)
-	wndMain:FindChild("OpponentFlipped"):SetText(arFlipsByOpponent[0] or 0)
-	wndMain:FindChild("OpponentFlipped1"):SetText(arFlipsByOpponent[1] or 0)
-	wndMain:FindChild("OpponentFlipped2"):SetText(arFlipsByOpponent[2] or 0)
-	wndMain:FindChild("OpponentFlipped3"):SetText(arFlipsByOpponent[3] or 0)
-	wndMain:FindChild("OpponentFlipped4"):SetText(arFlipsByOpponent[4] or 0)
-	wndMain:FindChild("EasyGamesWon"):SetText(arDifficultyGamesWon[1] or 0)
-	wndMain:FindChild("EasyGamesLost"):SetText(arDifficultyGamesLost[1] or 0)
-	wndMain:FindChild("EasyGamesDrawn"):SetText(arDifficultyGamesDrawn[1] or 0)
-	wndMain:FindChild("MediumGamesWon"):SetText(arDifficultyGamesWon[2] or 0)
-	wndMain:FindChild("MediumGamesLost"):SetText(arDifficultyGamesLost[2] or 0)
-	wndMain:FindChild("MediumGamesDrawn"):SetText(arDifficultyGamesDrawn[2] or 0)
-	wndMain:FindChild("HardGamesWon"):SetText(arDifficultyGamesWon[3] or 0)
-	wndMain:FindChild("HardGamesLost"):SetText(arDifficultyGamesLost[3] or 0)
-	wndMain:FindChild("HardGamesDrawn"):SetText(arDifficultyGamesDrawn[3] or 0)
-	wndMain:FindChild("TotalGamesPlayed"):SetText(Statistics.tStatistics.nTotalGamesPlayed or 0)
-	wndMain:FindChild("TotalGamesWon"):SetText(Statistics.tStatistics.nTotalGamesWon or 0)
-	wndMain:FindChild("TotalGamesLost"):SetText(Statistics.tStatistics.nTotalGamesLost or 0)
-	wndMain:FindChild("TotalGamesDrawn"):SetText(Statistics.tStatistics.nTotalGamesDrawn or 0)
-	wndMain:FindChild("TotalGamesAbandoned"):SetText((Statistics.tStatistics.nTotalGamesPlayed or 0) - ((Statistics.tStatistics.nTotalGamesWon or 0) + (Statistics.tStatistics.nTotalGamesLost or 0) + (Statistics.tStatistics.nTotalGamesDrawn or 0)))
-	wndMain:FindChild("BestWinningScore"):SetText(Statistics.tStatistics.nBestWinningScore or "-")
-	wndMain:FindChild("WorstLosingScore"):SetText(Statistics.tStatistics.nWorstLosingScore or "-")
-	wndMain:FindChild("AverageWinningScore"):SetText(strAverageWinningScore or "-")
-	wndMain:FindChild("AverageLosingScore"):SetText(strAverageLosingScore or "-")
-	wndMain:FindChild("AverageOverallScore"):SetText(strAverageOverallScore or "-")
-	wndMain:FindChild("UniqueOpponentsEncountered"):SetText(string.format("%d of %d (%0.f%%)", nUniqueOpponentsEncountered, #CardsData.karOpponents, nUniqueOpponentsEncountered / #CardsData.karOpponents * 100))
-	wndMain:FindChild("UniqueOpponentsDefeated"):SetText(string.format("%d of %d (%0.f%%)", nUniqueOpponentsDefeated, #CardsData.karOpponents, nUniqueOpponentsDefeated / #CardsData.karOpponents * 100))
-	wndMain:FindChild("MostEncountered"):SetText(strMostEncounteredOpponent or "-")
-	wndMain:FindChild("MostDefeated"):SetText(strMostDefeatedOpponent or "-")
-	wndMain:FindChild("MostDefeatedBy"):SetText(strMostDefeatedByOpponent or "-")
+function Statistics.Populate( wndMain, tCalculated, strPlayerName )
+	if not tCalculated then tCalculated = Statistics.Calculate() end
+
+	wndMain:FindChild("CardsFoundFromKills"):SetText(tCalculated.nCardsFoundFromKills or 0)
+	wndMain:FindChild("CardsWonFromGames"):SetText(tCalculated.nCardsWonInGames or 0)
+	wndMain:FindChild("CardsLostInGames"):SetText(tCalculated.nCardsLostInGames or 0)
+	wndMain:FindChild("UniqueCardsOwned"):SetText(tCalculated.nUniqueCardsOwned or 0)
+	wndMain:FindChild("MostUniqueCardsOwned"):SetText(tCalculated.nMostUniqueCardsOwned or 0)
+	wndMain:FindChild("YouCardsFlipped"):SetText(tCalculated.arFlipsByYou[0] or 0)
+	wndMain:FindChild("YouFlipped1"):SetText(tCalculated.arFlipsByYou[1] or 0)
+	wndMain:FindChild("YouFlipped2"):SetText(tCalculated.arFlipsByYou[2] or 0)
+	wndMain:FindChild("YouFlipped3"):SetText(tCalculated.arFlipsByYou[3] or 0)
+	wndMain:FindChild("YouFlipped4"):SetText(tCalculated.arFlipsByYou[4] or 0)
+	wndMain:FindChild("OpponentFlipped"):SetText(tCalculated.arFlipsByOpponent[0] or 0)
+	wndMain:FindChild("OpponentFlipped1"):SetText(tCalculated.arFlipsByOpponent[1] or 0)
+	wndMain:FindChild("OpponentFlipped2"):SetText(tCalculated.arFlipsByOpponent[2] or 0)
+	wndMain:FindChild("OpponentFlipped3"):SetText(tCalculated.arFlipsByOpponent[3] or 0)
+	wndMain:FindChild("OpponentFlipped4"):SetText(tCalculated.arFlipsByOpponent[4] or 0)
+	wndMain:FindChild("EasyGamesWon"):SetText(tCalculated.arDifficultyGamesWon[1] or 0)
+	wndMain:FindChild("EasyGamesLost"):SetText(tCalculated.arDifficultyGamesLost[1] or 0)
+	wndMain:FindChild("EasyGamesDrawn"):SetText(tCalculated.arDifficultyGamesDrawn[1] or 0)
+	wndMain:FindChild("MediumGamesWon"):SetText(tCalculated.arDifficultyGamesWon[2] or 0)
+	wndMain:FindChild("MediumGamesLost"):SetText(tCalculated.arDifficultyGamesLost[2] or 0)
+	wndMain:FindChild("MediumGamesDrawn"):SetText(tCalculated.arDifficultyGamesDrawn[2] or 0)
+	wndMain:FindChild("HardGamesWon"):SetText(tCalculated.arDifficultyGamesWon[3] or 0)
+	wndMain:FindChild("HardGamesLost"):SetText(tCalculated.arDifficultyGamesLost[3] or 0)
+	wndMain:FindChild("HardGamesDrawn"):SetText(tCalculated.arDifficultyGamesDrawn[3] or 0)
+	wndMain:FindChild("TotalGamesPlayed"):SetText(tCalculated.nTotalGamesPlayed or 0)
+	wndMain:FindChild("TotalGamesWon"):SetText(tCalculated.nTotalGamesWon or 0)
+	wndMain:FindChild("TotalGamesLost"):SetText(tCalculated.nTotalGamesLost or 0)
+	wndMain:FindChild("TotalGamesDrawn"):SetText(tCalculated.nTotalGamesDrawn or 0)
+	wndMain:FindChild("TotalGamesAbandoned"):SetText((tCalculated.nTotalGamesPlayed or 0) - ((tCalculated.nTotalGamesWon or 0) + (tCalculated.nTotalGamesLost or 0) + (tCalculated.nTotalGamesDrawn or 0)))
+	wndMain:FindChild("BestWinningScore"):SetText(tCalculated.nBestWinningScore or "-")
+	wndMain:FindChild("WorstLosingScore"):SetText(tCalculated.nWorstLosingScore or "-")
+	wndMain:FindChild("AverageWinningScore"):SetText(tCalculated.strAverageWinningScore or "-")
+	wndMain:FindChild("AverageLosingScore"):SetText(tCalculated.strAverageLosingScore or "-")
+	wndMain:FindChild("AverageOverallScore"):SetText(tCalculated.strAverageOverallScore or "-")
+	wndMain:FindChild("UniqueOpponentsEncountered"):SetText(string.format("%d of %d (%0.f%%)", tCalculated.nUniqueOpponentsEncountered, #CardsData.karOpponents, tCalculated.nUniqueOpponentsEncountered / #CardsData.karOpponents * 100))
+	wndMain:FindChild("UniqueOpponentsDefeated"):SetText(string.format("%d of %d (%0.f%%)", tCalculated.nUniqueOpponentsDefeated, #CardsData.karOpponents, tCalculated.nUniqueOpponentsDefeated / #CardsData.karOpponents * 100))
+	wndMain:FindChild("MostEncountered"):SetText(tCalculated.strMostEncounteredOpponent or "-")
+	wndMain:FindChild("MostDefeated"):SetText(tCalculated.strMostDefeatedOpponent or "-")
+	wndMain:FindChild("MostDefeatedBy"):SetText(tCalculated.strMostDefeatedByOpponent or "-")
+	
+	if strPlayerName then
+		wndMain:FindChild("Title"):SetText("Cards Statistics for " .. strPlayerName)
+	else
+		wndMain:FindChild("Title"):SetText("Cards Statistics")
+	end
 end
 
 function Statistics.AddGamePlayed( nDifficulty )

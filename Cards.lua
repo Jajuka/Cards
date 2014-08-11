@@ -111,7 +111,7 @@ function Cards:OnDocLoaded()
 end
 
 function Cards:OnChannelMessageReceived( oChannel, tMessage, strSender )
-	Print("Relaying channel message from " .. strSender)
+	--Print("Relaying channel message from " .. strSender)
 
 	-- Ensure it's a valid message.
 	if not tMessage or not tMessage.strCommand then
@@ -119,7 +119,7 @@ function Cards:OnChannelMessageReceived( oChannel, tMessage, strSender )
 	end
 
 	if tMessage.strType == "Players" then
-		Print("- Relaying message to Players module.")
+		--Print("- Relaying message to Players module.")
 		self:GetPlayersModule()
 		self.oPlayers:OnChannelMessageReceived(oChannel , tMessage, strSender)
 	else
