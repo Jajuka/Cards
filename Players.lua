@@ -5,6 +5,7 @@
 require "Window"
  
 local CardsData = _G["Saikou:CardsLibs"]["CardsData"]
+local Options = _G["Saikou:CardsLibs"]["Options"]
 local Statistics = _G["Saikou:CardsLibs"]["Statistics"]
 
 -----------------------------------------------------------------------------------------------
@@ -89,6 +90,10 @@ function Players:OnRefreshTimerTick()
 end
 
 function Players:BeginSearch()
+	if Options.tOptions.bSilent then
+		return
+	end
+	
 	self.wndMain:FindChild("Loading"):Show(true)
 	self.bListeningForPingPongResponses = true
 	
@@ -127,6 +132,10 @@ function Players:OnCloseButton( wndHandler, wndControl, eMouseButton )
 end
 
 function Players:OnRefreshButton( wndHandler, wndControl, eMouseButton )
+	if Options.tOptions.bSilent then
+		Sound.Play(107)
+		return
+	end
 	self:BeginSearch()
 end
 
@@ -216,6 +225,20 @@ function Players:CreateListItem( tMessage )
 	else
 		wndItem:FindChild("Challenge"):Enable(false)
 		wndItem:FindChild("Challenge"):FindChild("Icon"):SetBGColor("ff555555")
+	end
+	if (tMessage.bAllowStatistics) then
+		wndItem:FindChild("Stats"):Enable(true)
+		wndItem:FindChild("Stats"):FindChild("Icon"):SetBGColor("white")
+	else
+		wndItem:FindChild("Statistics"):Enable(false)
+		wndItem:FindChild("Statistics"):FindChild("Icon"):SetBGColor("ff555555")
+	end
+	if (tMessage.bAllowCollection) then
+		wndItem:FindChild("Collection"):Enable(true)
+		wndItem:FindChild("Collection"):FindChild("Icon"):SetBGColor("white")
+	else
+		wndItem:FindChild("Collection"):Enable(false)
+		wndItem:FindChild("Collection"):FindChild("Icon"):SetBGColor("ff555555")
 	end
 	--wndItem:FindChild("Collection"):Enable(false)
 	--wndItem:FindChild("Collection"):FindChild("Icon"):SetBGColor("ff555555")
@@ -324,11 +347,19 @@ function Players:OnPlayerWhisperButton( wndHandler, wndControl, eMouseButton )
 end
 
 function Players:OnPlayerCollectionButton( wndHandler, wndControl, eMouseButton )
+	if Options.tOptions.bSilent then
+		Sound.Play(107)
+		return
+	end
 	local tData = wndControl:GetParent():GetData()
 	self.oChannel:SendPrivateMessage({ tData.strName }, { strType = "Players", strCommand = "RequestCollection" })
 end
 
 function Players:OnPlayerStatisticsButton( wndHandler, wndControl, eMouseButton )
+	if Options.tOptions.bSilent then
+		Sound.Play(107)
+		return
+	end
 	local tData = wndControl:GetParent():GetData()
 	self.oChannel:SendPrivateMessage({ tData.strName }, { strType = "Players", strCommand = "RequestStats" })
 end
@@ -339,6 +370,10 @@ end
 -- Channel Functions
 ---------------------------------------------------------------------------------------------------
 function Players:OnChannelMessageReceived( oChannel, tMessage, strSender )
+	if Options.tOptions.bSilent then
+		return
+	end
+
 	--Print("Message received from " .. strSender)
 	-- Ensure it's a valid message.
 	if not tMessage or not tMessage.strCommand then
@@ -356,7 +391,7 @@ function Players:OnChannelMessageReceived( oChannel, tMessage, strSender )
 	elseif tMessage.strCommand == "Pong" and self.bListeningForPingPongResponses then
 		-- Create a list item for the ping responder.
 		self:CreateListItem(tMessage)
-	elseif tMessage.strCommand == "RequestStats" then
+	elseif tMessage.strCommand == "RequestStats" and not Options.tOptions.bNoStatistics then
 		-- Send a response with our statistics (assuming requestor isn't on ignore list).
 		self.oChannel:SendPrivateMessage({ strSender }, { strType = "Players", strCommand = "ReceiveStats", tStatistics = Statistics.Calculate() })
 	elseif tMessage.strCommand == "ReceiveStats" then
@@ -364,7 +399,7 @@ function Players:OnChannelMessageReceived( oChannel, tMessage, strSender )
 		if tMessage.tStatistics then
 			Event_FireGenericEvent("Saikou:Cards_ShowPlayerStatistics", { tStatistics = tMessage.tStatistics, strName = strSender })
 		end
-	elseif tMessage.strCommand == "RequestCollection" then
+	elseif tMessage.strCommand == "RequestCollection" and not Options.tOptions.bNoCollection then
 		-- Send a response (assuming requestor isn't on ignore list).
 		self.oChannel:SendPrivateMessage({ strSender }, { strType = "Players", strCommand = "ReceiveCollection", tCollection = self.tCollection })
 	elseif tMessage.strCommand == "ReceiveCollection" then
@@ -391,7 +426,9 @@ function Players:CreatePingPongResponse()
 		nLevel = oPlayer:GetLevel(),
 		strRace = Players.RaceIdToString(oPlayer:GetRaceId(), oPlayer:GetFaction()),
 		strClass = Players.ClassIdToString(oPlayer:GetClassId()),
-		bAllowChallenge = false,
+		bAllowChallenge = not Options.tOptions.bNoChallenges and false,
+		bAllowStatistics = not Options.tOptions.bNoStatistics,
+		bAllowCollection = not Options.tOptions.bNoCollection,
 		fCompletion = self:CalculateCollectionCompletion(),
 	}
 end
