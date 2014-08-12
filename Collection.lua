@@ -51,11 +51,19 @@ function Collection.new()
 	return self
 end
 
-function Collection:Initialise( tCollection, nOpenToCardId  )
+function Collection:Initialise( tCollection, nOpenToCardId, strPlayerName )
 	assert(tCollection ~= nil, "Collection class requires a collection parameter to the constructor.")
 	self.tCollection = tCollection
 	self.nOpenToCardId = nOpenToCardId
 	self.tCategorised = {}
+	
+	if strPlayerName then
+		local strPossessive = "s"
+		if string.sub(strPlayerName, -1) == "s" then strPossessive = "" end
+		self.wndMain:FindChild("Title"):SetText(string.format("%s'%s Collection", strPlayerName, strPossessive))
+	else
+		self.wndMain:FindChild("Title"):SetText("Your card collection")
+	end
 end
 
 function Collection:PopulateCategories()

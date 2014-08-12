@@ -94,6 +94,7 @@ function Cards:OnDocLoaded()
 		Apollo.RegisterEventHandler("Saikou:Cards_BattleStart", "OnBattleStart", self)
 		Apollo.RegisterEventHandler("Saikou:Cards_BattleComplete", "OnBattleComplete", self)
 		Apollo.RegisterEventHandler("Saikou:Cards_ShowPlayerStatistics", "OnViewPlayerStatistics", self)
+		Apollo.RegisterEventHandler("Saikou:Cards_ShowPlayerCollection", "OnViewPlayerCollection", self)
 		Apollo.RegisterEventHandler("CombatLogDamage", "OnCombatLogDamage", self)
 		
 		self.oChannel = ICCommLib.JoinChannel("chanSaikouCards", "OnChannelMessageReceived", self)
@@ -340,6 +341,18 @@ function Cards:OnViewPlayerStatistics( tArgs )
 	Statistics.Populate(self.wndStatistics, tArgs.tStatistics, tArgs.strName)
 	self.wndStatistics:Show(true)
 	self.wndStatistics:ToFront()
+end
+
+function Cards:OnViewPlayerCollection( tArgs )
+	if self.oCollection and not self.oCollection.wndMain then
+		self.oCollection = nil
+	end
+	if not self.oCollection then
+		self.oCollection = Collection:new()
+	end
+	self.oCollection:Initialise(tArgs.tCollection, nil, tArgs.strName)
+	self.oCollection.wndMain:Invoke()
+	self.oCollection.wndMain:ToFront()
 end
 
 -----------------------------------------------------------------------------------------------

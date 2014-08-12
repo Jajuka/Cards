@@ -217,8 +217,8 @@ function Players:CreateListItem( tMessage )
 		wndItem:FindChild("Challenge"):Enable(false)
 		wndItem:FindChild("Challenge"):FindChild("Icon"):SetBGColor("ff555555")
 	end
-	wndItem:FindChild("Collection"):Enable(false)
-	wndItem:FindChild("Collection"):FindChild("Icon"):SetBGColor("ff555555")
+	--wndItem:FindChild("Collection"):Enable(false)
+	--wndItem:FindChild("Collection"):FindChild("Icon"):SetBGColor("ff555555")
 	
 	local tFriends = FriendshipLib.GetList()
 	local tFriendsData = {}
@@ -325,7 +325,7 @@ end
 
 function Players:OnPlayerCollectionButton( wndHandler, wndControl, eMouseButton )
 	local tData = wndControl:GetParent():GetData()
-	self.oChannel:SendMessage({ tData.strName }, { strType = "Players", strCommand = "RequestStats" })
+	self.oChannel:SendPrivateMessage({ tData.strName }, { strType = "Players", strCommand = "RequestCollection" })
 end
 
 function Players:OnPlayerStatisticsButton( wndHandler, wndControl, eMouseButton )
@@ -347,29 +347,31 @@ function Players:OnChannelMessageReceived( oChannel, tMessage, strSender )
 
 	--Print(tMessage.strCommand)
 	
+	-- TODO: Check options.
+	-- TODO: Check if sender is on ignore.
+	
 	if tMessage.strCommand == "Ping" then
 		-- TODO: Send a response (assuming requestor isn't on ignore list).
-		--Print("Sending pong command.")
 		self.oChannel:SendMessage(self:CreatePingPongResponse())
 	elseif tMessage.strCommand == "Pong" and self.bListeningForPingPongResponses then
 		-- Create a list item for the ping responder.
 		self:CreateListItem(tMessage)
 	elseif tMessage.strCommand == "RequestStats" then
 		-- Send a response with our statistics (assuming requestor isn't on ignore list).
-		--self:OnChannelMessageReceived(self.oChannel, { strCommand = "ReceiveStats", tStatistics = Statistics.Calculate() }, GameLib.GetPlayerUnit():GetName())
-		--Print("Sending stats command to " .. strSender)
 		self.oChannel:SendPrivateMessage({ strSender }, { strType = "Players", strCommand = "ReceiveStats", tStatistics = Statistics.Calculate() })
-		--CardsData.Print_r(Statistics.Calculate())
 	elseif tMessage.strCommand == "ReceiveStats" then
 		-- Received someone's stats, so show the statistics window.
 		if tMessage.tStatistics then
 			Event_FireGenericEvent("Saikou:Cards_ShowPlayerStatistics", { tStatistics = tMessage.tStatistics, strName = strSender })
-			--CardsData.Print_r(tMessage.tStatistics)
 		end
 	elseif tMessage.strCommand == "RequestCollection" then
-		-- TODO: Send a response (assuming requestor isn't on ignore list).
+		-- Send a response (assuming requestor isn't on ignore list).
+		self.oChannel:SendPrivateMessage({ strSender }, { strType = "Players", strCommand = "ReceiveCollection", tCollection = self.tCollection })
 	elseif tMessage.strCommand == "ReceiveCollection" then
 		-- Received someone's collection, so show the collection window.
+		if tMessage.tCollection then
+			Event_FireGenericEvent("Saikou:Cards_ShowPlayerCollection", { tCollection = tMessage.tCollection, strName = strSender })
+		end
 	end
 end
 
